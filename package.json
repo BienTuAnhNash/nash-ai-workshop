@@ -12,6 +12,8 @@
     "e2e:headed": "playwright test --headed",
     "e2e:debug": "playwright test --debug",
     "e2e:report": "playwright show-report",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepare": "husky",
     "lint": "eslint .",
     "format": "prettier --write . && eslint --fix",
@@ -62,6 +64,7 @@
     "globals": "^17.6.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
-    "vite": "^8.0.12"
+    "vite": "^8.0.12",
+    "jsdom": "^27.0.0"
   }
 }

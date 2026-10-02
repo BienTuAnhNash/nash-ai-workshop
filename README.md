@@ -1,6 +1,6 @@
-Welcome to your new TanStack Start app!
+# Welcome to your new TanStack Start app
 
-# Getting Started
+## Getting Started
 
 To run this application:
 
@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-# Building For Production
+## Building For Production
 
 To build this application for production:
 
@@ -25,6 +25,44 @@ This project uses [Vitest](https://vitest.dev/) for testing. You can run the tes
 
 ```bash
 npm run test
+```
+
+### E2E testing with Playwright
+
+Install Playwright browser (Chromium):
+
+```bash
+npx playwright install chromium
+```
+
+Run end-to-end tests:
+
+```bash
+npm run e2e
+```
+
+Open Playwright UI mode:
+
+```bash
+npm run e2e:ui
+```
+
+Run headed browser mode:
+
+```bash
+npm run e2e:headed
+```
+
+Debug tests interactively:
+
+```bash
+npm run e2e:debug
+```
+
+Open HTML report:
+
+```bash
+npm run e2e:report
 ```
 
 ## Tech stacks

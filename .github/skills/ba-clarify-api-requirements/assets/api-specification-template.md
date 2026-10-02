@@ -6,13 +6,13 @@ Use this template for a single API endpoint or operation. Include only applicabl
 
 ## 1. HTTP Method and Endpoint
 
-| Item | Value |
-|---|---|
-| API Name | `<api-name>` |
+| Item        | Value                             |
+| ----------- | --------------------------------- |
+| API Name    | `<api-name>`                      |
 | HTTP Method | `<GET/POST/PUT/PATCH/DELETE/...>` |
-| Endpoint | `<path>` |
-| Version | `<version or N/A>` |
-| Consumer(s) | `<consumer systems/users>` |
+| Endpoint    | `<path>`                          |
+| Version     | `<version or N/A>`                |
+| Consumer(s) | `<consumer systems/users>`        |
 
 ---
 
@@ -32,35 +32,35 @@ Explain the purpose, primary use cases, prerequisites, and key business context 
 
 ### Headers
 
-| Header | Type | Required | Description | Example |
-|---|---|---|---|---|
+| Header          | Type     | Required               | Description     | Example     |
+| --------------- | -------- | ---------------------- | --------------- | ----------- |
 | `<header-name>` | `<type>` | `<Yes/No/Conditional>` | `<description>` | `<example>` |
 
 ### Path Parameters
 
 | Parameter | Type | Required | Description | Example |
-|---|---|---|---|---|
+| --------- | ---- | -------- | ----------- | ------- |
 
 ### Query Parameters
 
 | Parameter | Type | Required | Description | Example |
-|---|---|---|---|---|
+| --------- | ---- | -------- | ----------- | ------- |
 
 ### Request Body Data Dictionary
 
 Omit this section when the API has no request body. Otherwise, include one full-body data dictionary using field paths.
 
-| Field Path | Description | Data Type | Required | Nullable | Example | Validation / Constraints | Notes |
-|---|---|---|---|---|---|---|---|
-| `<field.path>` | `<business meaning>` | `<type>` | `<Yes/No/Conditional>` | `<Yes/No>` | `<example>` | `<rule or N/A>` | `<notes>` |
+| Field Path     | Description          | Data Type | Required               | Nullable   | Example     | Validation / Constraints | Notes     |
+| -------------- | -------------------- | --------- | ---------------------- | ---------- | ----------- | ------------------------ | --------- |
+| `<field.path>` | `<business meaning>` | `<type>`  | `<Yes/No/Conditional>` | `<Yes/No>` | `<example>` | `<rule or N/A>`          | `<notes>` |
 
 ### Request Body Mapping
 
 Omit this section when no request body mapping or transformation is needed.
 
-| API Request Field Path | Source / Consumer Input | Target System / Field | Transformation / Business Rule | Validation / Error Handling | Notes |
-|---|---|---|---|---|---|
-| `<field.path>` | `<source>` | `<target>` | `<rule>` | `<validation>` | `<notes>` |
+| API Request Field Path | Source / Consumer Input | Target System / Field | Transformation / Business Rule | Validation / Error Handling | Notes     |
+| ---------------------- | ----------------------- | --------------------- | ------------------------------ | --------------------------- | --------- |
+| `<field.path>`         | `<source>`              | `<target>`            | `<rule>`                       | `<validation>`              | `<notes>` |
 
 ### Sample Request
 
@@ -109,17 +109,17 @@ Describe when this response is returned.
 
 Omit this section when the response has no structured body. Otherwise, include one full-body data dictionary using field paths.
 
-| Field Path | Description | Data Type | Required | Nullable | Example | Validation / Constraints | Notes |
-|---|---|---|---|---|---|---|---|
-| `<field.path>` | `<business meaning>` | `<type>` | `<Yes/No/Conditional>` | `<Yes/No>` | `<example>` | `<rule or N/A>` | `<notes>` |
+| Field Path     | Description          | Data Type | Required               | Nullable   | Example     | Validation / Constraints | Notes     |
+| -------------- | -------------------- | --------- | ---------------------- | ---------- | ----------- | ------------------------ | --------- |
+| `<field.path>` | `<business meaning>` | `<type>`  | `<Yes/No/Conditional>` | `<Yes/No>` | `<example>` | `<rule or N/A>`          | `<notes>` |
 
 ### Response Body Mapping
 
 Omit this section when no response source mapping or transformation is needed.
 
-| API Response Field Path | Source System / Field | Transformation / Business Rule | Null / Fallback Handling | Notes |
-|---|---|---|---|---|
-| `<field.path>` | `<source>` | `<rule>` | `<fallback>` | `<notes>` |
+| API Response Field Path | Source System / Field | Transformation / Business Rule | Null / Fallback Handling | Notes     |
+| ----------------------- | --------------------- | ------------------------------ | ------------------------ | --------- |
+| `<field.path>`          | `<source>`            | `<rule>`                       | `<fallback>`             | `<notes>` |
 
 ### Sample Response
 
@@ -133,9 +133,9 @@ Omit this section when no response source mapping or transformation is needed.
 
 ## 7. Error Responses
 
-| HTTP Status | Error Code | Message | When Returned |
-|---|---|---|---|
-| `<status>` | `<code>` | `<message>` | `<condition>` |
+| HTTP Status | Error Code | Message     | When Returned |
+| ----------- | ---------- | ----------- | ------------- |
+| `<status>`  | `<code>`   | `<message>` | `<condition>` |
 
 ---
 
@@ -143,10 +143,10 @@ Omit this section when no response source mapping or transformation is needed.
 
 ### Assumptions
 
-| ID | Assumption | Impact if Wrong |
-|---|---|---|
+| ID  | Assumption | Impact if Wrong |
+| --- | ---------- | --------------- |
 
 ### Open Questions
 
-| ID | Question | Needed For |
-|---|---|---|
+| ID  | Question | Needed For |
+| --- | -------- | ---------- |

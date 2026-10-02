@@ -9,15 +9,18 @@ Use when slicing elicited business requirements, briefs, mockups, or system spec
 Adapt slicing strategy to the project's technical architecture and delivery scope:
 
 ### A. Full-Stack / User-Facing Projects (Web, Mobile, Portal)
+
 - Slice vertically by complete **User Goal**, **Trigger**, and **Business Value**.
 - Ensure each story delivers demonstrable end-to-end functionality (UI + Business Logic + Data).
 
 ### B. API-Only / Integration / Microservice Projects
-- Slice by **API Consumer Goal**, **Endpoint Capability**, or **Integration Event** (e.g., *"As an API Consumer, I want to authenticate via OAuth2 to obtain a access token"*).
+
+- Slice by **API Consumer Goal**, **Endpoint Capability**, or **Integration Event** (e.g., _"As an API Consumer, I want to authenticate via OAuth2 to obtain a access token"_).
 - Ensure each story delivers a complete, testable API capability (Endpoint Contract + Validation + System Processing).
 
 ### C. Data / Database / Platform Migration Projects
-- Slice by **Data Capability**, **Pipeline Transformation Unit**, or **Schema Migration Scope** (e.g., *"As a Data Engineer, I want order transaction logs ingested into Snowflake to support real-time reporting"*).
+
+- Slice by **Data Capability**, **Pipeline Transformation Unit**, or **Schema Migration Scope** (e.g., _"As a Data Engineer, I want order transaction logs ingested into Snowflake to support real-time reporting"_).
 - Ensure each story delivers a testable data ingestion, transformation, or storage capability.
 
 ---
@@ -42,7 +45,7 @@ Adapt slicing strategy to the project's technical architecture and delivery scop
      - `UPDATE`: Slicing modifies an existing screen (adds fields, validation rules, or state transitions) $\rightarrow$ update `gui-<screen-slug>.md` and append to `Screen Change Log`.
      - `DELETE`: Slicing deprecates/retires a screen or UI component $\rightarrow$ update/archive `gui-<screen-slug>.md`.
      - `NONE`: Backend/API/Data story with no UI component.
-   - For API / Backend changes $\rightarrow$ Reference linked [API Specification](./api-spec-name.md).
+   - For API / Backend changes $\rightarrow$ reference the linked `api-<api-slug>.md` specification.
 
 ---
 
@@ -66,7 +69,7 @@ Before finalizing candidate story slices, evaluate the requirement against 3 cor
 
 4. **ZOMBIES Scope Sizing**:
    - Ensure stories are sliced into **Simple (S)** $\le 1$ week scope with **One (O)** primary success path.
-   - Decompose **Many (M)** (bulk actions / complex lists) into separate stories, delegating UI list views to [GUI Specifications](./gui-screen-slug.md).
+   - Decompose **Many (M)** (bulk actions / complex lists) into separate stories, delegating UI list views to `gui-<screen-slug>.md`.
 
 ---
 

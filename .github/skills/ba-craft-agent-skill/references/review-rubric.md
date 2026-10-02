@@ -19,6 +19,7 @@ Execute this rubric as a mandatory quality gate across **all three workflows**:
 All agents and skills must satisfy these 5 foundational dimensions:
 
 ### Dimension 1: Sound & Sensible Trigger Workflow
+
 - **Check 1.1: Frontmatter Quality**: Does the YAML `description` clearly state both **WHAT** the agent/skill does and **WHEN** to invoke it? Is it written in actionable third-person?
 - **Check 1.2: Trigger Ambiguity & Overlap**: Do multiple agents or skills share vague trigger phrases (e.g., "helps with testing" vs "reviews code")? When boundaries overlap, establish sharp distinguishing criteria.
 - **Check 1.3: Handoff Soundness**: When delegating to another agent or skill, is the handoff condition crisp, unidirectional, and loop-free?
@@ -35,12 +36,14 @@ All agents and skills must satisfy these 5 foundational dimensions:
   - **Anti-Pattern Check**: Flag any agent that defaults to vanilla AI assistant framing (e.g., "You are an AI assistant that helps with...", "I am here to assist you"). Agents must embody a dedicated, authoritative domain specialist with clear professional judgment.
 
 ### Dimension 2: Strict DRY & SSOT (Single Source of Truth)
+
 - **Check 2.1: Duplicate Rule Definitions**: Are business rules, coding standards, or domain models duplicated across prompts instead of referencing centralized instruction files (e.g., shared coding guidelines, testing standards)?
 - **Check 2.2: Contradicting Instructions**: Do instructions contradict global guidelines (e.g., `instructions/ba-agent-rules.md`) or sibling skills (e.g., conflicting question caps, disparate artifact directories)?
 - **Check 2.3: Shadow Standards**: Does the asset invent custom copies of existing standards that risk becoming stale?
 - **Check 2.4: Single-Home Placement**: Does every rule, instruction, or check live in strictly ONE authoritative file? Flag any update that scatters duplicate or paraphrased copies across multiple files instead of establishing one SSOT and having others link to it.
 
 ### Dimension 3: Token Consumption & Prompt Bloat
+
 - **Check 3.1: Conversational Fluff & Preamble**: Are there unnecessary introductory essays, motivational speeches, or redundant meta-commentary?
 - **Check 3.2: Formatting Micromanagement**: Does the prompt micromanage trivial formatting details (e.g., exact space counts) that consume tokens without functional value?
 - **Check 3.3: Verbatim Bot Scripting**: Does the prompt script exact canned sentences for the agent to say? Rely on natural model fluency.
@@ -50,6 +53,7 @@ All agents and skills must satisfy these 5 foundational dimensions:
 - **Check 3.7: Script Offloading for Deterministic Operations**: Does the asset burn LLM tokens executing deterministic file searching, regex matching, artifact CRUD, index updating, or checklist audits that could be offloaded to helper scripts in `scripts/` for zero-token execution?
 
 ### Dimension 4: Instruction Flow & Conditional Branching
+
 - **Check 4.1: Linear Flow Pollution**: Are rare edge cases, error handlers, and tool fallbacks cluttering the main happy path?
 - **Check 4.2: Explicit Branching Logic**: Are conditional paths structured with clean, unambiguous `IF <condition> THEN <action> ELSE <action>` logic?
 - **Check 4.3: Tool Coupling & Portability**: Does the prompt decouple from ephemeral or proprietary UI tools, providing generic CLI or shell fallbacks?
@@ -60,6 +64,7 @@ All agents and skills must satisfy these 5 foundational dimensions:
   - Does the prompt prevent unnecessary reads by relying on index summaries, targeted excerpts, or cached metadata rather than loading whole massive files into prompt context?
 
 ### Dimension 5: Actionability, Tool Grounding & Verification
+
 - **Check 5.1: Grounded Verbs & Specific Commands**: Does each step provide concrete, executable actions (e.g., "Run test suite", "Inspect `src/<module>/endpoints.*`") rather than vague advice?
 - **Check 5.2: Verification Checkpoints**: Does the skill or agent verify its changes (compiling, running test suites, inspecting git diffs) before declaring completion?
 - **Check 5.3: Output Contract & Deliverables**: Is the expected deliverable (file path, file name, schema, layout) clearly and unambiguously specified?
@@ -96,24 +101,29 @@ All agents and skills must satisfy these 5 foundational dimensions:
 Expand audits beyond the 5 baseline dimensions. Actively apply architectural creativity, domain intuition, and proactive innovation:
 
 ### Dimension 6: Cognitive Ergonomics & Developer Experience (DX)
+
 - Does the workflow feel natural, effortless, and pleasant for the human engineer?
 - **Interrogation Fatigue Prevention**: Does the agent avoid interrogation fatigue by inferring context from the prompt first, and formulating questions with a **Recommended Approach and structured Options (annotating Pros & Cons)** rather than asking pure open-ended questions?
 - Can the output be parsed at a glance via visual hierarchy, tables, or diffs?
 
 ### Dimension 7: Model Steering & Hallucination Resilience
+
 - Does the prompt guard against common LLM tendencies (e.g., leaving `// TODO`, omitting assertions, fabricating parameter names)?
 - Does the assigned persona reinforce behavioral boundaries and prevent persona drift or ungrounded speculation?
 - Does the prompt inject preemptive negative constraints ("Never return empty arrays for nullable collections", "Never fabricate unauthorized domain schemas")?
 
 ### Dimension 8: Multi-Agent Synergy & Swarm Orchestration
+
 - How well does this agent or skill integrate into larger agentic swarms, parallel pipelines, or CI runners?
 - Can state or memory be handed off cleanly between upstream and downstream agents while preserving full execution context?
 
 ### Dimension 9: Extensibility & Evolutionary Design
+
 - Can new domain rules, API versions, or external providers be introduced seamlessly while keeping the prompt core intact?
 - Does the architecture uphold open-closed design principles (open for extension, closed for modification)?
 
 ### Dimension 10: Workflow Innovation, Script Automation & 10x Velocity Leaps
+
 - **Proactive Script Automation Suggestions**: What deterministic steps in instruction execution (research/lookup, artifact CRUD) or review checklists should be offloaded to helper scripts in `scripts/` to achieve 10x velocity and zero-token consumption?
 - **Parallel Multi-Task Execution**: Can multi-faceted research, validation, or generation tasks execute scripts concurrently?
 - **Full-Picture Synchronization Gate**: Does the workflow mandate waiting for all parallel scripts to complete before formulating conclusions?
@@ -123,12 +133,12 @@ Expand audits beyond the 5 baseline dimensions. Actively apply architectural cre
 
 ## 3. Severity Classification
 
-| Severity | Definition | Examples |
-|---|---|---|
-| **Critical** | Architectural defect causing infinite loops, contradictory execution gates, complete failure to trigger, or severe security violations. | Two agents delegating recursively to each other; agent instruction directly contradicting global security policy; missing frontmatter description causing skill to never trigger. |
-| **High** | Widespread duplication (SSOT violation), severe prompt bloat (>500 wasted tokens), conflicting rule caps, or unhandled edge cases breaking non-interactive runs. | Full coding guidelines copy-pasted across 4 agents; question cap set to 3 in constitution but 5 in agent; failure path missing causing silent stall. |
-| **Medium** | Minor redundancy, sub-optimal progressive disclosure, missing verification step, or slight trigger ambiguity. | Reference table inlined instead of linked in `references/`; ambiguous trigger phrase shared with another skill; missing compile check after file write. |
-| **Low** | Stylistic inconsistencies, minor wordiness, or formatting improvements. | Minor phrasing redundancy; slightly wordy section headers; missing markdown anchor link. |
+| Severity     | Definition                                                                                                                                                       | Examples                                                                                                                                                                          |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Critical** | Architectural defect causing infinite loops, contradictory execution gates, complete failure to trigger, or severe security violations.                          | Two agents delegating recursively to each other; agent instruction directly contradicting global security policy; missing frontmatter description causing skill to never trigger. |
+| **High**     | Widespread duplication (SSOT violation), severe prompt bloat (>500 wasted tokens), conflicting rule caps, or unhandled edge cases breaking non-interactive runs. | Full coding guidelines copy-pasted across 4 agents; question cap set to 3 in constitution but 5 in agent; failure path missing causing silent stall.                              |
+| **Medium**   | Minor redundancy, sub-optimal progressive disclosure, missing verification step, or slight trigger ambiguity.                                                    | Reference table inlined instead of linked in `references/`; ambiguous trigger phrase shared with another skill; missing compile check after file write.                           |
+| **Low**      | Stylistic inconsistencies, minor wordiness, or formatting improvements.                                                                                          | Minor phrasing redundancy; slightly wordy section headers; missing markdown anchor link.                                                                                          |
 
 ---
 
@@ -136,46 +146,57 @@ Expand audits beyond the 5 baseline dimensions. Actively apply architectural cre
 
 When delivering a review, use this standardized markdown structure to ensure responses are compact, scannable, and directly referenceable:
 
-```markdown
+````markdown
 # Agent & Skill Architecture Review: [Target Name / Scope]
 
 ## 1. Executive Summary
+
 - **Overall Health**: [Healthy / Needs Refactoring / Critical Overhaul]
 - **Key Strengths**: [1-2 bullets on what is working well]
 - **Primary Risks**: [Summary of key architectural vulnerabilities found]
 
 ## 2. Audited Files
-| File Path | Component Type | Current Role / Trigger | Soundness Rating |
-|---|---|---|---|
-| `agents/example.agent.md` | Agent | ... | Needs Refactoring |
+
+| File Path                 | Component Type | Current Role / Trigger | Soundness Rating  |
+| ------------------------- | -------------- | ---------------------- | ----------------- |
+| `agents/example.agent.md` | Agent          | ...                    | Needs Refactoring |
 
 ## 3. Actionable Findings Table
-| ID | Sev | Dimension | Target File & Location | Issue & Architectural Impact | Recommendation |
-|---|---|---|---|---|---|
-| **F-01** | Critical | Dim 1: Triggers | [`agent.md:L12`](file:///...) | Trigger phrase overlaps with `@analyst`; causes misrouting | Disambiguate with explicit boundary keyword |
-| **F-02** | High | Dim 3: Token Bloat | [`SKILL.md:L10-L25`](file:///...) | Duplicate `## When to Use` in body wastes 180 prompt tokens | Remove section; keep trigger in frontmatter SSOT |
-| **F-03** | Medium | Dim 2: DRY/SSOT | [`dev.agent.md:L45`](file:///...) | Inlined language rules duplicate standards and risk staleness | Point to shared coding guidelines |
+
+| ID       | Sev      | Dimension          | Target File & Location            | Issue & Architectural Impact                                  | Recommendation                                   |
+| -------- | -------- | ------------------ | --------------------------------- | ------------------------------------------------------------- | ------------------------------------------------ |
+| **F-01** | Critical | Dim 1: Triggers    | [`agent.md:L12`](file:///...)     | Trigger phrase overlaps with `@analyst`; causes misrouting    | Disambiguate with explicit boundary keyword      |
+| **F-02** | High     | Dim 3: Token Bloat | [`SKILL.md:L10-L25`](file:///...) | Duplicate `## When to Use` in body wastes 180 prompt tokens   | Remove section; keep trigger in frontmatter SSOT |
+| **F-03** | Medium   | Dim 2: DRY/SSOT    | [`dev.agent.md:L45`](file:///...) | Inlined language rules duplicate standards and risk staleness | Point to shared coding guidelines                |
 
 ## 4. Script Automation & 10x Velocity Opportunities
-| Opportunity | Target Operation (Research, CRUD, Checklist) | Proposed Script (`scripts/`) | Parallel Execution Model | Token & Time Savings |
-|---|---|---|---|---|
-| **Research Automation** | Entity, term, or code searching | `scripts/search_*.py` | Multi-query parallel threads | Cuts input tokens by 60–80%, <10ms response |
-| **Artifacts CRUD** | Index synchronization & link generation | `scripts/sync_*.py` | Single-pass directory walk | Zero LLM token spend, deterministic resolution |
-| **Review Checklist** | Structural & compliance checks | `scripts/validate_*.py` | Parallel rule checks | Instant deterministic linting, zero hallucination |
+
+| Opportunity             | Target Operation (Research, CRUD, Checklist) | Proposed Script (`scripts/`) | Parallel Execution Model     | Token & Time Savings                              |
+| ----------------------- | -------------------------------------------- | ---------------------------- | ---------------------------- | ------------------------------------------------- |
+| **Research Automation** | Entity, term, or code searching              | `scripts/search_*.py`        | Multi-query parallel threads | Cuts input tokens by 60–80%, <10ms response       |
+| **Artifacts CRUD**      | Index synchronization & link generation      | `scripts/sync_*.py`          | Single-pass directory walk   | Zero LLM token spend, deterministic resolution    |
+| **Review Checklist**    | Structural & compliance checks               | `scripts/validate_*.py`      | Parallel rule checks         | Instant deterministic linting, zero hallucination |
 
 > [!NOTE]
 > **Synchronization & Loop Safeguards**: All parallel script executions must be awaited by the calling agent to capture the complete 360° picture before making architectural decisions. Workflows and scripts must strictly implement recursion depth counters, retry limits, and excerpt/index-based read optimization to prevent runaway loops and unnecessary full-file reads.
 
 ## 5. SSOT & Duplication Matrix (If Applicable)
+
 [Table or diagram mapping duplicated rules across files to their single authoritative source]
 
 ## 6. Remediation Diffs & Actions
+
 > Present exact before/after diffs for **Critical / High** items, or ask the user which IDs to generate:
-> *"Which findings would you like me to apply? (e.g., 'Apply all', 'Apply F-01 and F-02', or ask for details on any ID)"*
+> _"Which findings would you like me to apply? (e.g., 'Apply all', 'Apply F-01 and F-02', or ask for details on any ID)"_
 
 ### Remediation: [F-01] [Brief Title]
+
 ```diff
 - [target content]
 + [replacement content]
 ```
+````
+
+```
+
 ```

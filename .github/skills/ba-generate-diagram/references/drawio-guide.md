@@ -24,6 +24,7 @@ Every `.drawio` file must use standard draw.io XML formatting:
 ```
 
 ### Essential Rules
+
 1. **Required Roots:** `id="0"` and `id="1"` must be present in `<root>`.
 2. **User Elements:** Assign unique IDs (`id="2"`, `id="node1"`, etc.).
 3. **Containers & Swimlanes:**
@@ -53,16 +54,18 @@ Every `.drawio` file must use standard draw.io XML formatting:
 ## 3. Shape & Preset Catalog
 
 ### A. Cross-Functional Swimlane & Flowchart
-| Element | Style | Notes |
-|---------|-------|-------|
-| Swimlane Pool (System / Process) | `swimlane;html=1;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=0;` | Outer container |
-| Lane (Role / Actor) | `swimlane;html=1;startSize=30;horizontal=0;collapsible=0;fillColor=none;` | Child of pool (`parent=poolId`) |
-| Start / End State | `ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;` | Green oval |
-| Activity / Process Box | `rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;` | Blue rounded rectangle (`Verb + Noun`) |
-| Decision Gateway | `rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;` | Yellow diamond |
-| Handoff edge | `edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;` | Cross-lane handoff arrows |
+
+| Element                          | Style                                                                                                                                 | Notes                                  |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| Swimlane Pool (System / Process) | `swimlane;html=1;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=0;` | Outer container                        |
+| Lane (Role / Actor)              | `swimlane;html=1;startSize=30;horizontal=0;collapsible=0;fillColor=none;`                                                             | Child of pool (`parent=poolId`)        |
+| Start / End State                | `ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;`                                                               | Green oval                             |
+| Activity / Process Box           | `rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;`                                                             | Blue rounded rectangle (`Verb + Noun`) |
+| Decision Gateway                 | `rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;`                                                               | Yellow diamond                         |
+| Handoff edge                     | `edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;`                                                                                     | Cross-lane handoff arrows              |
 
 ### B. Sequence Diagram (System & API Interaction)
+
 Use `python scripts/seqlayout.py seq.json -o out.drawio` for deterministic lifeline geometry.
 | Element | Style | Notes |
 |---------|-------|-------|
@@ -72,6 +75,7 @@ Use `python scripts/seqlayout.py seq.json -o out.drawio` for deterministic lifel
 | Activation Box | `shape=umlFrame;whiteSpace=wrap;` | Activation bar on lifeline |
 
 ### C. System Context & Scope (C4 Model)
+
 Use `python scripts/c4.py c4.json -o out.drawio` for multi-level context diagrams.
 | Element | Style | Notes |
 |---------|-------|-------|
@@ -80,6 +84,7 @@ Use `python scripts/c4.py c4.json -o out.drawio` for multi-level context diagram
 | External System | `rounded=1;arcSize=10;html=1;whiteSpace=wrap;fontColor=#ffffff;fillColor=#8C8496;strokeColor=#736782;` | Grey box (outside boundary) |
 
 ### D. Business Domain Model / Conceptual ERD
+
 Use `python scripts/sqlerd.py schema.sql -o out.drawio` when DDL exists.
 | Element | Style | Notes |
 |---------|-------|-------|
@@ -91,5 +96,6 @@ Use `python scripts/sqlerd.py schema.sql -o out.drawio` when DDL exists.
 ---
 
 ## 4. Delivery Guidelines
+
 - Deliver the generated diagram as a `.drawio` file.
 - Do **not** output or return encoded `diagrams.net` viewer URLs unless explicitly asked by the user.

@@ -59,28 +59,32 @@ For full-stack changes, review both layers and explicitly flag frontend↔backen
 ## Code Review Summary
 
 ### Critical Issues (Must Fix)
+
 - [SECURITY] Description — file:line
 - [BUG] Description — file:line
 
 ### Improvements (Should Fix)
+
 - [QUALITY] Description and suggestion — file:line
 - [PERFORMANCE] Description and suggestion — file:line
 
 ### Suggestions (Nice to Have)
+
 - Description
 
 ### Positive Observations
+
 - What was done well
 ```
 
 ## Severity levels
 
-| Level | Description | Action |
-|---|---|---|
-| Critical | Security vulnerability, data loss, crash | Must fix before commit |
-| High | Bug, logic error | Should fix before commit |
-| Medium | Code quality issue | Fix in this slice or log as follow-up |
-| Low | Style, preference | Optional |
+| Level    | Description                              | Action                                |
+| -------- | ---------------------------------------- | ------------------------------------- |
+| Critical | Security vulnerability, data loss, crash | Must fix before commit                |
+| High     | Bug, logic error                         | Should fix before commit              |
+| Medium   | Code quality issue                       | Fix in this slice or log as follow-up |
+| Low      | Style, preference                        | Optional                              |
 
 ## Reviewer discipline
 

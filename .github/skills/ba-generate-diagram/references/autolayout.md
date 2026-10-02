@@ -33,30 +33,46 @@ It prints `wrote diagram.drawio (N nodes, M edges)` to stderr and writes a norma
 {
   "direction": "TB",
   "nodes": [
-    {"id": "client", "label": "Web Client", "style": "rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;"},
-    {"id": "gw", "label": "API Gateway", "group": "edge", "groupLabel": "Edge tier"},
-    {"id": "db", "label": "User DB", "style": "shape=cylinder3;whiteSpace=wrap;html=1;", "width": 120, "height": 80, "group": "data"}
+    {
+      "id": "client",
+      "label": "Web Client",
+      "style": "rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;"
+    },
+    {
+      "id": "gw",
+      "label": "API Gateway",
+      "group": "edge",
+      "groupLabel": "Edge tier"
+    },
+    {
+      "id": "db",
+      "label": "User DB",
+      "style": "shape=cylinder3;whiteSpace=wrap;html=1;",
+      "width": 120,
+      "height": 80,
+      "group": "data"
+    }
   ],
   "edges": [
-    {"source": "client", "target": "gw", "label": "HTTPS"},
-    {"source": "gw", "target": "db"}
+    { "source": "client", "target": "gw", "label": "HTTPS" },
+    { "source": "gw", "target": "db" }
   ]
 }
 ```
 
 **Fields**
 
-| Field | Required | Default | Notes |
-| --- | --- | --- | --- |
-| `direction` | no | `TB` | `TB` (top→bottom) or `LR` (left→right) — the layout rank direction |
-| `nodes[].id` | **yes** | — | Unique; must not be `0` or `1` (reserved for draw.io root cells) |
-| `nodes[].label` | no | the `id` | Display text; auto XML-escaped |
-| `nodes[].style` | no | group colour, else blue | Any draw.io style string — reuse the role/shape styles from `diagram-types.md` and the active preset. A styleless node is tinted by its group (see **Containers / grouping**); an explicit style always wins |
-| `nodes[].width` / `height` | no | `120` / `60` | Pixels; dot lays out at this real size |
-| `nodes[].group` | no | none | Group key, or a `/`-delimited path (`"core/db"`) for **nested** containers — nodes sharing a path are boxed together (see **Containers / grouping**) |
-| `nodes[].groupLabel` | no | last path segment | Title shown on the node's deepest container (first node with the path wins) |
-| `edges[].source` / `target` | **yes** | — | Must match node ids |
-| `edges[].label` | no | empty | Edge text |
+| Field                       | Required | Default                 | Notes                                                                                                                                                                                                        |
+| --------------------------- | -------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `direction`                 | no       | `TB`                    | `TB` (top→bottom) or `LR` (left→right) — the layout rank direction                                                                                                                                           |
+| `nodes[].id`                | **yes**  | —                       | Unique; must not be `0` or `1` (reserved for draw.io root cells)                                                                                                                                             |
+| `nodes[].label`             | no       | the `id`                | Display text; auto XML-escaped                                                                                                                                                                               |
+| `nodes[].style`             | no       | group colour, else blue | Any draw.io style string — reuse the role/shape styles from `diagram-types.md` and the active preset. A styleless node is tinted by its group (see **Containers / grouping**); an explicit style always wins |
+| `nodes[].width` / `height`  | no       | `120` / `60`            | Pixels; dot lays out at this real size                                                                                                                                                                       |
+| `nodes[].group`             | no       | none                    | Group key, or a `/`-delimited path (`"core/db"`) for **nested** containers — nodes sharing a path are boxed together (see **Containers / grouping**)                                                         |
+| `nodes[].groupLabel`        | no       | last path segment       | Title shown on the node's deepest container (first node with the path wins)                                                                                                                                  |
+| `edges[].source` / `target` | **yes**  | —                       | Must match node ids                                                                                                                                                                                          |
+| `edges[].label`             | no       | empty                   | Edge text                                                                                                                                                                                                    |
 
 ## How it places things
 
@@ -68,7 +84,7 @@ It prints `wrote diagram.drawio (N nodes, M edges)` to stderr and writes a norma
 
 Give nodes a `group` key and the script wraps each group in a labeled container (a dashed box with the group title at top) and tells dot to keep that group's nodes together via a Graphviz cluster. Grouped nodes become children of their container (`parent="<container>"`, relative coordinates); ungrouped nodes stay at the top level. This turns a flat hairball into a "boxes of related modules" architecture view.
 
-**Nesting.** A `group` value with `/` separators builds nested containers: `"core/db"` puts the node inside a `db` box that itself sits inside a `core` box. Every path prefix becomes a container, so an arbitrarily deep package tree maps to nested boxes. A node can also sit *directly* in a parent box (`group: "core"`) alongside a sibling sub-box (`group: "core/db"`).
+**Nesting.** A `group` value with `/` separators builds nested containers: `"core/db"` puts the node inside a `db` box that itself sits inside a `core` box. Every path prefix becomes a container, so an arbitrarily deep package tree maps to nested boxes. A node can also sit _directly_ in a parent box (`group: "core"`) alongside a sibling sub-box (`group: "core/db"`).
 
 - **Colour by group.** Each top-level group is assigned a colour from the skill's own palette (`styles/built-in/default.json`, cycled in role order: blue → green → orange → purple → yellow → red → grey). A node with no `style` of its own is tinted with its group's colour, and the container's border + title match — so related modules read as a coloured cluster instead of monochrome boxes. A node that carries its own `style` (e.g. from an applied preset) is left untouched. Pass `--mono` to turn colouring off (dashed grey boxes, default-blue nodes — the previous look). Ungrouped graphs are unaffected.
 - Each container box is the bounding box of its members and child boxes plus a uniform padding. The dot cluster margin is set to that same padding, so each box equals dot's cluster box — which dot keeps non-overlapping at **any nesting depth**.
@@ -90,19 +106,19 @@ It catches dangling edge endpoints, duplicate/reserved ids, broken parent refere
 
 Bundled importers turn a codebase or an IaC configuration into a graph JSON ready for autolayout, so "visualize this project" is a two-step pipeline:
 
-| Source | Script | Node = | Edge = |
-| --- | --- | --- | --- |
-| Python | `scripts/pyimports.py <dir>` | module / package (`ast`) | intra-project `import` / `from` |
-| JS / TS | `scripts/jsimports.py <dir>` | source file (`.ts/.tsx/.js/.jsx/.mjs/.cjs`) | resolved relative `import`/`export from`/`require()`/`import()` |
-| Go | `scripts/goimports.py <dir>` | package (directory, via `go.mod`) | intra-module package import |
-| Rust | `scripts/rustimports.py <dir>` | module (`.rs` file / `mod`) | intra-crate `use crate::` / `super::` / `self::` |
-| Python (classes) | `scripts/pyclasses.py <dir>` | class (`ast`) | subclass → base (inheritance) |
-| Terraform | `scripts/tfimports.py <dir>` | `resource` / `module` block, rendered as its **official AWS/Azure/GCP icon** | cross-resource reference (`aws_iam_role.x.arn`, `${...}`, `depends_on`) |
-| Kubernetes | `scripts/k8simports.py <dir>` | manifest object (kind/name), rendered as its **official K8s kind icon** | Ingress→Service, Service→workload (selector), workload→ConfigMap/Secret/PVC, HPA→target |
-| docker-compose | `scripts/composeimports.py <file-or-dir>` | service (name + image box) / named volume (cylinder) | `depends_on` / `links` / `volumes_from` / named-volume mounts |
-| Terraform state (**live**) | `terraform show -json \| scripts/tfstate.py -` | **deployed** resource instance, rendered as its **official cloud icon** | recorded dependency (`depends_on` in state) |
-| Docker (**live**) | `docker inspect $(docker ps -q) \| scripts/dockerimports.py -` | running container (name + image) / user network (ellipse) / named volume (cylinder) | container→network, container→volume, `links` / compose `depends_on` |
-| SQL DDL | `scripts/sqlerd.py <file-or-dir>` | table (column list with PK/FK markers) | foreign key (crow's-foot, labeled with the FK column) |
+| Source                     | Script                                                         | Node =                                                                              | Edge =                                                                                  |
+| -------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Python                     | `scripts/pyimports.py <dir>`                                   | module / package (`ast`)                                                            | intra-project `import` / `from`                                                         |
+| JS / TS                    | `scripts/jsimports.py <dir>`                                   | source file (`.ts/.tsx/.js/.jsx/.mjs/.cjs`)                                         | resolved relative `import`/`export from`/`require()`/`import()`                         |
+| Go                         | `scripts/goimports.py <dir>`                                   | package (directory, via `go.mod`)                                                   | intra-module package import                                                             |
+| Rust                       | `scripts/rustimports.py <dir>`                                 | module (`.rs` file / `mod`)                                                         | intra-crate `use crate::` / `super::` / `self::`                                        |
+| Python (classes)           | `scripts/pyclasses.py <dir>`                                   | class (`ast`)                                                                       | subclass → base (inheritance)                                                           |
+| Terraform                  | `scripts/tfimports.py <dir>`                                   | `resource` / `module` block, rendered as its **official AWS/Azure/GCP icon**        | cross-resource reference (`aws_iam_role.x.arn`, `${...}`, `depends_on`)                 |
+| Kubernetes                 | `scripts/k8simports.py <dir>`                                  | manifest object (kind/name), rendered as its **official K8s kind icon**             | Ingress→Service, Service→workload (selector), workload→ConfigMap/Secret/PVC, HPA→target |
+| docker-compose             | `scripts/composeimports.py <file-or-dir>`                      | service (name + image box) / named volume (cylinder)                                | `depends_on` / `links` / `volumes_from` / named-volume mounts                           |
+| Terraform state (**live**) | `terraform show -json \| scripts/tfstate.py -`                 | **deployed** resource instance, rendered as its **official cloud icon**             | recorded dependency (`depends_on` in state)                                             |
+| Docker (**live**)          | `docker inspect $(docker ps -q) \| scripts/dockerimports.py -` | running container (name + image) / user network (ellipse) / named volume (cylinder) | container→network, container→volume, `links` / compose `depends_on`                     |
+| SQL DDL                    | `scripts/sqlerd.py <file-or-dir>`                              | table (column list with PK/FK markers)                                              | foreign key (crow's-foot, labeled with the FK column)                                   |
 
 ```bash
 python3 <this-skill-dir>/scripts/pyimports.py myproject -o graph.json
@@ -132,7 +148,7 @@ python3 <this-skill-dir>/scripts/drawiodiff.py old.drawio new.drawio -o diff.jso
 python3 <this-skill-dir>/scripts/autolayout.py diff.json -o diff.drawio
 ```
 
-Nodes match by cell **id** by default — ideal for anything the importers or live-infra snapshots produce (their ids are stable semantic keys), so *snapshot → change → snapshot → diff* shows drift directly (e.g. two `tfstate.py` or `k8simports.py` snapshots). Pass `--by-label` to match on the visible label instead, for hand-drawn diagrams whose ids are random. Only leaf vertices and their edges are compared (containers/group cells and edge labels are skipped); the diff is a flat colour-coded view, so original icons are replaced by status colours (labels are kept). Multi-page files are flattened; compressed pages are skipped with a warning (this skill always writes uncompressed XML).
+Nodes match by cell **id** by default — ideal for anything the importers or live-infra snapshots produce (their ids are stable semantic keys), so _snapshot → change → snapshot → diff_ shows drift directly (e.g. two `tfstate.py` or `k8simports.py` snapshots). Pass `--by-label` to match on the visible label instead, for hand-drawn diagrams whose ids are random. Only leaf vertices and their edges are compared (containers/group cells and edge labels are skipped); the diff is a flat colour-coded view, so original icons are replaced by status colours (labels are kept). Multi-page files are flattened; compressed pages are skipped with a warning (this skill always writes uncompressed XML).
 
 ## Architecture time-lapse over git history (`timelapse.py`)
 
@@ -145,7 +161,7 @@ python3 <this-skill-dir>/scripts/timelapse.py src --importer pyimports --max-fra
 
 `--importer` is any bundled graph extractor (`pyimports`/`jsimports`/`goimports`/`rustimports`/`pyclasses`/`tfimports`/`k8simports`/`composeimports`/`sqlerd`), run with the same positional `<dir>` it expects, so **point `<dir>` at the module / project / infra root** — extra flags pass through via `--importer-args "--group"`. Commits touching the dir are sampled evenly down to `--max-frames` (always keeping the first and last); a commit where the importer finds nothing (the path did not exist yet) is skipped. It renders one draw.io frame per commit, so it needs git + Graphviz + the draw.io CLI and takes a few seconds per frame. The story is strongest on a package with real **import edges** (they accumulate over time); a flat directory still shows the node count grow.
 
-The tf/k8s importers emit `ranksep`/`nodesep` in the graph JSON automatically (icon labels render *below* the shape, so rows need extra separation).
+The tf/k8s importers emit `ranksep`/`nodesep` in the graph JSON automatically (icon labels render _below_ the shape, so rows need extra separation).
 
 **`--tune` (autolayout flag)**: lays the graph out in both directions (TB and LR), scores each (through-vertex routes ×20 + edge crossings ×10 + total edge length as tiebreak), and keeps the better one — report on stderr. `validate.py --score` prints the same style of readability score for a finished `.drawio`, for comparing variants.
 

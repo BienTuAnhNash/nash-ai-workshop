@@ -30,11 +30,7 @@
     },
     "confidence": {
       "type": "string",
-      "enum": [
-        "low",
-        "medium",
-        "high"
-      ]
+      "enum": ["low", "medium", "high"]
     },
     "source": {
       "type": "object",
@@ -42,12 +38,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "xml",
-            "image",
-            "built-in",
-            "hand-authored"
-          ]
+          "enum": ["xml", "image", "built-in", "hand-authored"]
         },
         "path": {
           "type": "string"
@@ -150,10 +141,7 @@
     "font": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "fontFamily",
-        "fontSize"
-      ],
+      "required": ["fontFamily", "fontSize"],
       "properties": {
         "fontFamily": {
           "type": "string"
@@ -176,10 +164,7 @@
     "edges": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "style",
-        "arrow"
-      ],
+      "required": ["style", "arrow"],
       "properties": {
         "style": {
           "type": "string"
@@ -231,10 +216,7 @@
         {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "fillColor",
-            "strokeColor"
-          ],
+          "required": ["fillColor", "strokeColor"],
           "properties": {
             "fillColor": {
               "type": "string",

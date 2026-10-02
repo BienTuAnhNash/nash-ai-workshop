@@ -12,17 +12,17 @@ The recurring backbone is one pipeline — an **extractor** emits graph JSON, th
 
 ## Decision Guide
 
-| I have… | I want… | Use |
-|---|---|---|
-| a description in words | a styled diagram | hand-write XML ([references/xml-authoring.md](xml-authoring.md)) or `autolayout.py` |
-| a big/complex graph | it laid out for me | `autolayout.py` (`--tune` picks best direction) |
-| a sequence of interactions | a UML sequence diagram | `seqlayout.py` |
-| a system at 3 zoom levels | a C4 model with drill-down | `c4.py` |
-| a SQL schema | an ER diagram | `sqlerd.py` |
-| an OpenAPI / Swagger spec | an API diagram (by method) | `openapiimports.py` |
-| a shape/icon need | the exact style string | `shapesearch.py` |
-| an exported PNG file | repair IEND chunk truncation | `repair_png.py` |
-| a `.drawio` file | structural XML lint & score | `validate.py` |
+| I have…                    | I want…                      | Use                                                                                 |
+| -------------------------- | ---------------------------- | ----------------------------------------------------------------------------------- |
+| a description in words     | a styled diagram             | hand-write XML ([references/xml-authoring.md](xml-authoring.md)) or `autolayout.py` |
+| a big/complex graph        | it laid out for me           | `autolayout.py` (`--tune` picks best direction)                                     |
+| a sequence of interactions | a UML sequence diagram       | `seqlayout.py`                                                                      |
+| a system at 3 zoom levels  | a C4 model with drill-down   | `c4.py`                                                                             |
+| a SQL schema               | an ER diagram                | `sqlerd.py`                                                                         |
+| an OpenAPI / Swagger spec  | an API diagram (by method)   | `openapiimports.py`                                                                 |
+| a shape/icon need          | the exact style string       | `shapesearch.py`                                                                    |
+| an exported PNG file       | repair IEND chunk truncation | `repair_png.py`                                                                     |
+| a `.drawio` file           | structural XML lint & score  | `validate.py`                                                                       |
 
 ---
 

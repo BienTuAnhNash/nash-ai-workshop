@@ -77,9 +77,9 @@ Validate as you go, not only at the end. Document any deliberate deviation (acce
 
 ## Common issues
 
-| Symptom | Cause | Fix |
-|---|---|---|
-| Output truncated | Design too deeply nested for one response | `get_metadata` first, then fetch child nodes individually |
-| Result doesn't match the design | Values assumed rather than read | Compare side by side with the step-3 screenshot; re-read spacing/colour values from the design context |
-| Assets don't load | Asset URLs rewritten | Use the MCP's `localhost` URLs unmodified |
-| Token values differ from Figma | Project tokens have their own scale | Keep project tokens; adjust spacing/size to hold visual fidelity |
+| Symptom                         | Cause                                     | Fix                                                                                                    |
+| ------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Output truncated                | Design too deeply nested for one response | `get_metadata` first, then fetch child nodes individually                                              |
+| Result doesn't match the design | Values assumed rather than read           | Compare side by side with the step-3 screenshot; re-read spacing/colour values from the design context |
+| Assets don't load               | Asset URLs rewritten                      | Use the MCP's `localhost` URLs unmodified                                                              |
+| Token values differ from Figma  | Project tokens have their own scale       | Keep project tokens; adjust spacing/size to hold visual fidelity                                       |

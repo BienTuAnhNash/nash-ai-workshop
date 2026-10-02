@@ -7,6 +7,7 @@ This guide details how to configure Model Context Protocol (MCP) servers and cal
 ## 1. Atlassian Jira Integration
 
 ### Step 1.1: MCP Configuration
+
 Ensure the Atlassian MCP server is registered in your environment configuration (e.g., VS Code extension settings or agent config):
 
 ```json
@@ -26,8 +27,10 @@ Ensure the Atlassian MCP server is registered in your environment configuration 
 ```
 
 ### Step 1.2: Discovering Custom Field IDs
+
 Jira Cloud instances often assign unique IDs to custom fields (e.g. `customfield_10014` for Epic Link or Parent).
 To discover custom field IDs:
+
 1. Run a test issue query via MCP: `Atlassian:getIssue(issueIdOrKey="SAMPLE-1")`.
 2. Inspect the returned JSON payload to locate:
    - Story Points field name (e.g., `customfield_10026`).
@@ -40,6 +43,7 @@ To discover custom field IDs:
 ## 2. Microsoft Azure DevOps (ADO) Integration
 
 ### Step 2.1: MCP Configuration
+
 Register the Azure DevOps MCP server in your workspace configuration:
 
 ```json
@@ -58,7 +62,9 @@ Register the Azure DevOps MCP server in your workspace configuration:
 ```
 
 ### Step 2.2: Discovering Area & Iteration Paths
+
 ADO requires valid Project, Area Path, and Iteration Path hierarchies:
+
 1. Query a sample work item via MCP: `azure-devops:getWorkItem(id=123)`.
 2. Extract:
    - `System.AreaPath` (e.g., `ProjectName\\FeatureTeam`).
@@ -71,6 +77,7 @@ ADO requires valid Project, Area Path, and Iteration Path hierarchies:
 ## 3. Calibrating Status Transitions
 
 Ensure your project's board workflow matches the push/pull states in `ba-sync-backlog`:
+
 - **Draft Requirements**: Local markdown only (`status: draft`).
 - **Refined / Backlog Intake**: Pushed to remote board as `To Do` / `New` with `external_key` recorded in frontmatter.
 - **In Development**: Status synchronized on pull requests.

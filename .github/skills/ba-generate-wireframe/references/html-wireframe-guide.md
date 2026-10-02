@@ -16,29 +16,36 @@ Recommended structure:
 ```html
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Feature Wireframe</title>
-  <style>
-    :root {
-      --bg: #f7f7f7;
-      --panel: #ffffff;
-      --muted: #e8e8e8;
-      --line: #9a9a9a;
-      --text: #222222;
-      --accent: #2f6fdd;
-      --space: 8px;
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Arial, sans-serif; color: var(--text); background: var(--bg); }
-  </style>
-</head>
-<body>
-  <main class="wireframe">
-    <!-- screens/components -->
-  </main>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Feature Wireframe</title>
+    <style>
+      :root {
+        --bg: #f7f7f7;
+        --panel: #ffffff;
+        --muted: #e8e8e8;
+        --line: #9a9a9a;
+        --text: #222222;
+        --accent: #2f6fdd;
+        --space: 8px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wireframe">
+      <!-- screens/components -->
+    </main>
+  </body>
 </html>
 ```
 

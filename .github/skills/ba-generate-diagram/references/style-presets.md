@@ -17,11 +17,13 @@ A **style preset** is a named JSON file capturing visual themes — palette, sha
 ## 2. Applying a Preset
 
 To re-theme an existing `.drawio` file:
+
 ```bash
 python3 scripts/restyle.py diagram.drawio --preset <name>
 ```
 
 ### Color Lookup
+
 - **Services / Primary:** `fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#1E3A8A;`
 - **Backend / Integration:** `fillColor=#EDE9FE;strokeColor=#7C3AED;fontColor=#4C1D95;`
 - **Decisions / Warnings:** `fillColor=#FEF3C7;strokeColor=#D97706;fontColor=#78350F;`
@@ -33,6 +35,7 @@ python3 scripts/restyle.py diagram.drawio --preset <name>
 ## 3. Dark Theme Extras
 
 When using dark palettes:
+
 - Set `extras.fontColor="#FFFFFF"` on shapes so text is clearly visible on dark fills.
 - Set `extras.edgeColor="#CCCCCC"` so edge lines stand out.
 - Set `background="#1E1E1E"` on the `<mxGraphModel>` container.

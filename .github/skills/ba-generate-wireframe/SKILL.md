@@ -16,6 +16,7 @@ Before generating any wireframe, the agent **MUST ask the user** (via interactiv
   - **Structured Text-Based Wireframe (`.md`)**: PRD-ready structural hierarchy, ASCII/markdown layout blocks, component inventories, and UX state descriptions for lightweight documentation and pre-visual handoffs.
 
 ### Mode Details:
+
 - When **HTML** is chosen: generate a self-contained `.html` file with embedded CSS under `<epic-slug>/wireframes/wireframe-<slug>.html` and run the Automated Multimodal Visual Review Gate.
 - When **Text-based** is chosen: generate a structured markdown wireframe file under `<epic-slug>/wireframes/wireframe-<slug>.md` following [references/text-wireframe-guide.md](references/text-wireframe-guide.md).
 - Use Mid-Fi fidelity by default unless the user asks for Lo-Fi or Hi-Fi.
@@ -34,6 +35,7 @@ Before generating any wireframe, the agent **MUST ask the user** (via interactiv
 ## Requirement Output Placement
 
 Follow the deliverable folder placement and index update rules owned by `ba-manage-requirement-artifacts`:
+
 - Put user-story or epic-related wireframes in `.agent-artifacts/requirements/output/<epic-slug>/wireframes/`.
 - Put project-wide wireframes in `.agent-artifacts/requirements/output/wireframes/`.
 
@@ -82,29 +84,32 @@ Placement rules:
 
 Directly invoke these utilities using the exact CLI syntax below; do not inspect script source code unless diagnosing an execution error:
 
-| Utility | Script Command | Description |
-|---|---|---|
-| **Wireframe Scaffolder** | `powershell -NoProfile -File skills/ba-generate-wireframe/scripts/scaffold_wireframe.ps1 --title "<Screen Title>" --output "<path.html>"` | Scaffolds responsive HTML shell with embedded CSS tokens, cutting generation tokens by 50–70%. |
-| **Screenshot Renderer** | `powershell -NoProfile -File skills/ba-generate-wireframe/scripts/render_screenshot.ps1 --input "<path.html>" [--viewport desktop\|mobile]` | Uses headless Chromium/Edge to render HTML wireframes to crisp PNG images for multimodal visual review. |
+| Utility                  | Script Command                                                                                                                              | Description                                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Wireframe Scaffolder** | `powershell -NoProfile -File skills/ba-generate-wireframe/scripts/scaffold_wireframe.ps1 --title "<Screen Title>" --output "<path.html>"`   | Scaffolds responsive HTML shell with embedded CSS tokens, cutting generation tokens by 50–70%.          |
+| **Screenshot Renderer**  | `powershell -NoProfile -File skills/ba-generate-wireframe/scripts/render_screenshot.ps1 --input "<path.html>" [--viewport desktop\|mobile]` | Uses headless Chromium/Edge to render HTML wireframes to crisp PNG images for multimodal visual review. |
 
 ## Automated Multimodal Visual Review Gate (`view_image`)
 
 Never evaluate wireframe quality based on raw HTML/CSS syntax or ASCII art alone. After scaffolding, authoring, or modifying an HTML wireframe, the agent must render the wireframe to an image and perform a visual inspection.
 
 ### Visual Review Protocol:
+
 1. **Render Screenshot**: Execute `powershell -NoProfile -File skills/ba-generate-wireframe/scripts/render_screenshot.ps1 --input "<path.html>"`.
 2. **Visual Inspection**: Call `view_image` on the generated `<path.png>`.
 3. **Audit Against Standards**:
    - **`design.md` Grounding (Primary SSOT)**: Check whether `design.md` exists in the knowledge base (`.agent-artifacts/project-knowledge-base/wiki/design.md`, `solution-context/design.md`, or workspace root). If present, audit the rendered layout strictly against the tokens, typography scales, color scheme, border radii, and component styles specified in `design.md`.
    - **Core UI/UX Heuristics (When `design.md` is absent)**:
-     - *Visual Hierarchy & Scanning*: Does the primary call-to-action (CTA) or focal workflow immediately draw the user's eye (F/Z reading patterns)?
-     - *Gestalt & Spatial Rhythm*: Are padding, margins, and alignments consistent using an 8px grid rhythm?
-     - *Legibility & Contrast*: Does text meet WCAG 2.1 AA contrast requirements against background or translucent overlays? Are all labels fully visible with zero awkward clipping or line wrapping?
-     - *Interactive Affordance*: Are interactable buttons, drag handles, inputs, and toggles visually distinct from static labels and decorative cards?
-     - *State Completeness*: Are realistic empty, loading, or fallback states presented cleanly?
+     - _Visual Hierarchy & Scanning_: Does the primary call-to-action (CTA) or focal workflow immediately draw the user's eye (F/Z reading patterns)?
+     - _Gestalt & Spatial Rhythm_: Are padding, margins, and alignments consistent using an 8px grid rhythm?
+     - _Legibility & Contrast_: Does text meet WCAG 2.1 AA contrast requirements against background or translucent overlays? Are all labels fully visible with zero awkward clipping or line wrapping?
+     - _Interactive Affordance_: Are interactable buttons, drag handles, inputs, and toggles visually distinct from static labels and decorative cards?
+     - _State Completeness_: Are realistic empty, loading, or fallback states presented cleanly?
 
 ### Strict Anti-Loop Circuit Breaker:
+
 To prevent costly LLM loops and token drain:
+
 - **Maximum 1 Self-Correction Pass**:
   - If critical visual defects (broken layout, illegible contrast, clipping, severe misalignment with `design.md`) are identified during visual inspection, execute **exactly one** targeted HTML/CSS refactoring edit and re-render the screenshot.
   - Re-inspect the updated image once.
@@ -115,6 +120,7 @@ To prevent costly LLM loops and token drain:
 ## Validation
 
 Before presenting:
+
 - For HTML, execute the **Automated Multimodal Visual Review Gate** (render PNG + `view_image` inspection).
 - For text-based wireframes, check required sections, screen hierarchy, states, actions, assumptions, and constraints.
 - Check alignment, overflow, contrast, placeholder text, and responsive behavior when HTML is generated.

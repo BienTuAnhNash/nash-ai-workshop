@@ -99,18 +99,14 @@ Record the targeted research question, files actually read, and resulting confir
 
 Follow the 3-tier research fallback progression for each specific task type:
 
-| Task | Tier 1: Primary KB | Tier 2: Requirements Fallback | Tier 3: Codebase & Implementation Evidence (On User Confirmation) |
-|---|---|---|---|
-| **Elicitation** | `.agent-artifacts/project-knowledge-base/wiki/` (scope/stakeholders), `solution-context/` (domain/systems) | Specified `.agent-artifacts/requirements/input/` files, `.agent-artifacts/requirements/output/` | Technical architecture specs, environment configs, repository structures |
-| **Requirements Analysis** | `.agent-artifacts/project-knowledge-base/solution-context/` (behavior/API/data), `wiki/` (scope/risk) | Specified `.agent-artifacts/requirements/input/` files, related `.agent-artifacts/requirements/output/<epic-slug>/` | Business rules in code/scripts/pipelines, validation logic, API route handlers |
-| **API / Data Requirements** | `.agent-artifacts/project-knowledge-base/solution-context/` (systems, APIs, schemas, integrations) | `.agent-artifacts/requirements/output/.../api-*.md`, input files | API controllers, DTOs, OpenAPI specs, SQL schemas, ETL pipelines |
-| **User Story Drafting** | `.agent-artifacts/project-knowledge-base/solution-context/` (UI/API behavior), `wiki/` | Target epic folder (`.agent-artifacts/requirements/output/<epic-slug>/epic.md`), parent navigation `output/index.md` | Implementation contracts, entity schemas, state/event handlers, service interfaces |
-| **GUI / Wireframe** | `.agent-artifacts/project-knowledge-base/solution-context/` (screens, workflow, permissions), `wiki/` (brand guidelines, UX flows, `wiki/diagrams/`) | Target story/epic wireframes (`wireframe-*.html/md`) & GUI specs (`gui-*.md`) | UI components, page templates/views, layout structures, screen route definitions |
-| **Diagram** | `.agent-artifacts/project-knowledge-base/solution-context/` (actors, systems, data flow), `wiki/` (process flows, `wiki/<area>/diagrams/`) | Target story/epic diagrams (`diagram-*.md/bpmn`) & input diagrams | Workflow state machines, event handlers, ETL/service data pipelines, DB ERDs |
-
-
-
-
+| Task                        | Tier 1: Primary KB                                                                                                                                   | Tier 2: Requirements Fallback                                                                                        | Tier 3: Codebase & Implementation Evidence (On User Confirmation)                  |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Elicitation**             | `.agent-artifacts/project-knowledge-base/wiki/` (scope/stakeholders), `solution-context/` (domain/systems)                                           | Specified `.agent-artifacts/requirements/input/` files, `.agent-artifacts/requirements/output/`                      | Technical architecture specs, environment configs, repository structures           |
+| **Requirements Analysis**   | `.agent-artifacts/project-knowledge-base/solution-context/` (behavior/API/data), `wiki/` (scope/risk)                                                | Specified `.agent-artifacts/requirements/input/` files, related `.agent-artifacts/requirements/output/<epic-slug>/`  | Business rules in code/scripts/pipelines, validation logic, API route handlers     |
+| **API / Data Requirements** | `.agent-artifacts/project-knowledge-base/solution-context/` (systems, APIs, schemas, integrations)                                                   | `.agent-artifacts/requirements/output/.../api-*.md`, input files                                                     | API controllers, DTOs, OpenAPI specs, SQL schemas, ETL pipelines                   |
+| **User Story Drafting**     | `.agent-artifacts/project-knowledge-base/solution-context/` (UI/API behavior), `wiki/`                                                               | Target epic folder (`.agent-artifacts/requirements/output/<epic-slug>/epic.md`), parent navigation `output/index.md` | Implementation contracts, entity schemas, state/event handlers, service interfaces |
+| **GUI / Wireframe**         | `.agent-artifacts/project-knowledge-base/solution-context/` (screens, workflow, permissions), `wiki/` (brand guidelines, UX flows, `wiki/diagrams/`) | Target story/epic wireframes (`wireframe-*.html/md`) & GUI specs (`gui-*.md`)                                        | UI components, page templates/views, layout structures, screen route definitions   |
+| **Diagram**                 | `.agent-artifacts/project-knowledge-base/solution-context/` (actors, systems, data flow), `wiki/` (process flows, `wiki/<area>/diagrams/`)           | Target story/epic diagrams (`diagram-*.md/bpmn`) & input diagrams                                                    | Workflow state machines, event handlers, ETL/service data pipelines, DB ERDs       |
 
 ## Output Packet
 
@@ -120,31 +116,38 @@ Return a concise research packet to the calling agent:
 ## Knowledge Research Packet
 
 ### Research Scope
+
 - **Question:** The bounded question this research answers.
 - **Tiers searched / stopping reason:** What was searched and why research stopped.
 - **Implementation search:** `Not requested` | `Confirmed` | `Declined`.
 
 ### Files Read & External Web Sources
+
 - `path or URL` - why it was inspected or referenced
 
 ### Related Features & Functional Scope
+
 - **Existing Features & Modules:** Identified capabilities, feature areas, and related epic/story boundaries with source path.
 - **Cross-Feature Dependencies:** Upstream/downstream feature dependencies or integration points with source path.
 
 ### Confirmed System Behaviors & Business Rules
+
 - **System Behaviors:** State transitions, automated triggers, background operations, and API/screen behaviors with source path.
 - **Business Rules & Constraints:** Validation rules, decision criteria, calculation formulas, and policy constraints with source path.
 
 ### Confirmed PACT Facts
+
 - **People (P):** Identified user roles, permissions, accessibility, and personas with source path.
 - **Activities (A):** Workflows, SLAs, task triggers, and execution frequency with source path.
 - **Context (C):** Environmental, security, and regulatory compliance bounds (GDPR/HIPAA/PCI) with source path.
 - **Technologies (T):** APIs, platforms, database schemas, and hardware constraints with source path.
 
 ### Identified Gaps (Features, Behavior & PACT)
+
 - Unmentioned, incomplete, or unconfirmed features, behaviors, business rules, or PACT pillars requiring user elicitation or validation.
 
 ### Applicable Assumptions & Open Questions
+
 - Assumption and why it is not confirmed.
 - Question and impact on scope or estimation.
 ```
@@ -160,15 +163,19 @@ No relevant project knowledge-base content was found for this task. Proceeding m
 When delegating research, exploration, or codebase scanning to subagents (e.g. `@Explore` or specialized scout agents), enforce compressed output contracts to protect main orchestrator context window longevity:
 
 ### 1. Compressed Output Contract (`cavecrew` Pattern)
+
 For all factual discovery, file locating, symbol searches, and rule extraction, subagents must return terse, structured results:
+
 ```text
 <Topic / Target Area>:
-- [file.md:L12-L24](file.md#L12-L24) — `entity/symbol/rule` — concise factual note
+- `file.md:L12-L24` — `entity/symbol/rule` — concise factual note
 totals: <counts>. dependencies: <list>. risks: <list>.
 ```
+
 Subagents must omit conversational preambles ("I found several files...", "Let's inspect..."), hedging, and tool announcements.
 
 ### 2. The Cavecrew Golden Rule (Quality & Depth Safeguard)
+
 - **Factual & Structural Search (Use Cavecrew Compressed Mode)**: For "where is X defined?", "list all rules governing Y", "trace API payload fields", or "identify caller dependencies". Zero information loss, ~60–70% context token reduction into the main thread.
 - **Architectural Trade-Off Analysis (Use Vanilla Prose Mode)**: Only when the research task explicitly demands evaluating competing architectural alternatives, nuanced stakeholder trade-offs, or ambiguous business policies where full analytical prose and narrative rationale are required.
 
@@ -176,11 +183,11 @@ Subagents must omit conversational preambles ("I found several files...", "Let's
 
 Directly invoke these utilities using the exact CLI syntax below; do not inspect script source code unless diagnosing an execution error:
 
-| Utility | Script Command | Description |
-|---|---|---|
-| **Hybrid & Semantic Search** | `powershell -NoProfile -File skills/ba-research-project-knowledge/scripts/search_kb.ps1 "<query>" [--mode hybrid\|exact\|wildcard\|semantic] [--tier 1\|2\|all] [--json]` | High-speed hybrid search combining exact matching, wildcard globbing (`US-*`, `*epic*`), and semantic BM25 relevance scoring with domain synonym expansion. |
-| **Parallel "Full Picture" Search** | `powershell -NoProfile -File skills/ba-research-project-knowledge/scripts/search_kb.ps1 "<q1>" "<q2>" ... --parallel [--json]` | Executes multi-query searches concurrently across worker threads, waiting for all searches to complete to aggregate, deduplicate, and synthesize the 360° "full picture". |
-| **Catalog Entity Listing** | `powershell -NoProfile -File skills/ba-research-project-knowledge/scripts/search_kb.ps1 --list-entities [--tier 1\|2\|all] [--json]` | Instantly discovers and catalogs all recognized epics, stories, glossary definitions, and solution-context systems across the repository. |
+| Utility                            | Script Command                                                                                                                                                            | Description                                                                                                                                                               |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Hybrid & Semantic Search**       | `powershell -NoProfile -File skills/ba-research-project-knowledge/scripts/search_kb.ps1 "<query>" [--mode hybrid\|exact\|wildcard\|semantic] [--tier 1\|2\|all] [--json]` | High-speed hybrid search combining exact matching, wildcard globbing (`US-*`, `*epic*`), and semantic BM25 relevance scoring with domain synonym expansion.               |
+| **Parallel "Full Picture" Search** | `powershell -NoProfile -File skills/ba-research-project-knowledge/scripts/search_kb.ps1 "<q1>" "<q2>" ... --parallel [--json]`                                            | Executes multi-query searches concurrently across worker threads, waiting for all searches to complete to aggregate, deduplicate, and synthesize the 360° "full picture". |
+| **Catalog Entity Listing**         | `powershell -NoProfile -File skills/ba-research-project-knowledge/scripts/search_kb.ps1 --list-entities [--tier 1\|2\|all] [--json]`                                      | Instantly discovers and catalogs all recognized epics, stories, glossary definitions, and solution-context systems across the repository.                                 |
 
 ### Search Modes & Strategy Guidance
 
@@ -199,7 +206,3 @@ Directly invoke these utilities using the exact CLI syntax below; do not inspect
 - **Codebase Search Confirmation**: Never scan or search project implementation codebases (Tier 3) without explicitly prompting and obtaining confirmation from the user first.
 - **No Deliverables or Direct Elicitation**: Do not write final BA artifacts (stories, GUI specs, diagrams) or engage in user elicitation; return structured research findings and gaps to the calling agent.
 - **Structured Fallback Execution**: Follow the 4-tier fallback sequence rather than unguided workspace scanning.
-
-
-
-

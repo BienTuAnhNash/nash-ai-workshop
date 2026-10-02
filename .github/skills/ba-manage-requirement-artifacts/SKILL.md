@@ -26,7 +26,7 @@ flowchart TD
         US <-->|"Layout Links"| WF_F["Wireframes (wireframe-*.html / .md)"]
         GUI <-->|"Screen Change Log"| DIAG_F
         GUI <-->|"Screen Change Log"| WF_F
-        
+
       US --> EPIC["Epic Files (epic.md)"]
       GUI --> EPIC
       DIAG_F --> EPIC
@@ -35,11 +35,13 @@ flowchart TD
 ```
 
 ### Incoming Handoffs:
+
 - **From `ba-functional-decomposition` / `functional-decomposition.md`**: Reads `.agent-artifacts/requirements/output/functional-decomposition.md` to extract target `<epic-slug>` rows (story title, actor, user goal, slicing rationale), then authors `<epic-slug>/epic.md`, physical `us-*.md` user stories, and any needed `gui-*.md` screen specs — determining the GUI Spec CRUD Action itself, since the decomposition file does not carry GUI actions or links.
 - **From `ba-generate-wireframe`**: Receives rendered wireframe mockups $\rightarrow$ authors or updates cumulative `gui-<screen>.md` specifications and links them to user stories.
 - **From `ba-generate-diagram`**: Receives process/state flow diagrams $\rightarrow$ embeds diagram links into user story reference tables and GUI screen change logs.
 
 ### Outgoing Handoffs:
+
 - **To `ba-clarify-api-requirements`**: When backend endpoint contracts or schemas are required.
 - **To `ba-generate-diagram`**: When visual workflow or state transition diagrams are required.
 - **To `ba-sync-backlog`**: When backlog-ready items are ready for Jira or Azure DevOps sprint synchronization.
@@ -78,6 +80,7 @@ This skill manages files within the canonical folder hierarchy:
 ```
 
 ### Reference Guidelines & Templates
+
 - **User Stories**: `assets/user-story-template.md` & `references/user-story-guidelines.md`
 - **Definition of Ready (DoR)**: `references/definition-of-ready.md`
 - **GUI Specs**: `assets/gui-specification-template.md` & `references/gui-specification-guidelines.md`
@@ -97,24 +100,24 @@ This skill manages files within the canonical folder hierarchy:
 
 2. **Consume Decomposed Slices & Mandatory Elicitation Gate**:
    - Read the target `<epic-slug>` section from `functional-decomposition.md` (or confirmed slicing handoff) to retrieve pre-sliced stories and actor goals. Determine GUI Spec CRUD actions and screen linkage yourself — they are not part of the decomposition file.
-   - **Pre-Authoring Elicitation Gate (Universal Invariant)**: Before creating or modifying any vision & scope (`vision-scope.md`), functional decomposition (`functional-decomposition.md`), epic (`epic.md`), user story (`us-*.md`), or GUI specification (`gui-*.md`), verify that an interactive clarification batch (`vscode_askQuestions`) for that specific target was presented and answered in the active conversation turn, or that the user explicitly directed `"skip elicitation"` / `"use defaults"`. If neither condition is met, HALT file creation/editing and return that target to `ba-elicit-requirements`. Imperative user commands (*"start"*, *"create"*, *"write"*, *"update"*, *"modify"*, *"generate"*) NEVER waive this requirement.
+   - **Pre-Authoring Elicitation Gate (Universal Invariant)**: Before creating or modifying any vision & scope (`vision-scope.md`), functional decomposition (`functional-decomposition.md`), epic (`epic.md`), user story (`us-*.md`), or GUI specification (`gui-*.md`), verify that an interactive clarification batch (`vscode_askQuestions`) for that specific target was presented and answered in the active conversation turn, or that the user explicitly directed `"skip elicitation"` / `"use defaults"`. If neither condition is met, HALT file creation/editing and return that target to `ba-elicit-requirements`. Imperative user commands (_"start"_, _"create"_, _"write"_, _"update"_, _"modify"_, _"generate"_) NEVER waive this requirement.
 
 3. **Present Authoring Plan for Approval & Cadence**:
    - Before creating, editing, or overwriting any file, contribute this skill's Epic, User Story, and GUI Specification rows to the orchestrator's combined artifact plan. The combined plan also carries Wireframe and Diagram rows owned by `ba-generate-wireframe` and `ba-generate-diagram`.
 
-   | Artifact Type | Action | Owner | File Path | What Changes / Dependency |
-   |---|---|---|---|---|
+   | Artifact Type                           | Action                         | Owner                             | File Path               | What Changes / Dependency                                                                                         |
+   | --------------------------------------- | ------------------------------ | --------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
    | Epic \| User story \| GUI specification | `CREATE` \| `UPDATE` \| `NONE` | `ba-manage-requirement-artifacts` | `<epic-slug>/<file>.md` | `<new epic / new story / new AC / new RAID row / new GUI component / supporting wireframe or diagram link, etc.>` |
-
    - Do not write any file until the user confirms the combined plan and authoring cadence (**Iterative One-by-One Review** recommended vs **Batch Generation**).
    - In **Iterative One-by-One Review** mode, author the foundational container (`epic.md`) and visual anchor (`gui-*.md`), wait for user review, then author stories sequentially, pausing for review after each story. Do not create a wireframe or diagram yourself; route those approved rows to their owning skills.
 
 3a. **Semantic Testability Gate**:
-   - Before writing or updating acceptance criteria, read the authoritative [Definition of Ready](./references/definition-of-ready.md) and [User Story Guidelines](./references/user-story-guidelines.md).
-   - Extract business predicates from every `Given`, `When`, `Then`, and `And` step. Flag qualifiers such as `valid`, `complete`, `trustworthy`, `generic`, `inconclusive`, `available`, `successful`, `appropriate`, `fast`, `quick`, `cleanly`, `properly`, `reliable`, `confident`, and `suitable` when their meaning is not observable from the story or an authoritative linked source.
-   - If a qualifier is defined locally, record its boundary conditions, allowed values, or classification rule in a Definitions, Rules, Glossary, or equivalent section. If it is defined elsewhere, link the authoritative source.
-   - For fallback, precedence, classification, or routing behavior, add a decision table with `Input state | Observable condition | Selected path | Expected outcome`.
-   - Do not save or certify the artifact while an unresolved semantic qualifier or routing rule remains. Stop and ask for a decision with a recommended option and alternatives.
+
+- Before writing or updating acceptance criteria, read the authoritative [Definition of Ready](./references/definition-of-ready.md) and [User Story Guidelines](./references/user-story-guidelines.md).
+- Extract business predicates from every `Given`, `When`, `Then`, and `And` step. Flag qualifiers such as `valid`, `complete`, `trustworthy`, `generic`, `inconclusive`, `available`, `successful`, `appropriate`, `fast`, `quick`, `cleanly`, `properly`, `reliable`, `confident`, and `suitable` when their meaning is not observable from the story or an authoritative linked source.
+- If a qualifier is defined locally, record its boundary conditions, allowed values, or classification rule in a Definitions, Rules, Glossary, or equivalent section. If it is defined elsewhere, link the authoritative source.
+- For fallback, precedence, classification, or routing behavior, add a decision table with `Input state | Observable condition | Selected path | Expected outcome`.
+- Do not save or certify the artifact while an unresolved semantic qualifier or routing rule remains. Stop and ask for a decision with a recommended option and alternatives.
 
 4. **Folder & Naming Conventions**:
    - Use stable lowercase hyphenated slugs (e.g., `epic-01-user-auth`, `us-001-customer-login.md`, `gui-order-detail.md`).
@@ -135,9 +138,9 @@ This skill manages files within the canonical folder hierarchy:
 
 Directly invoke these utilities using the exact CLI syntax below; do not inspect script source code unless diagnosing an execution error:
 
-| Utility | Script Command | Description |
-|---|---|---|
-| **Index Synchronizer** | `powershell -NoProfile -File skills/ba-manage-requirement-artifacts/scripts/sync_indexes.ps1 --root "<repo-root>"` | Auto-syncs `epic.md`, child indexes, and parent navigation with zero token cost. `--root` accepts target repository path. |
+| Utility                         | Script Command                                                                                                                                              | Description                                                                                                                                                                                                                                                                                        |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Index Synchronizer**          | `powershell -NoProfile -File skills/ba-manage-requirement-artifacts/scripts/sync_indexes.ps1 --root "<repo-root>"`                                          | Auto-syncs `epic.md`, child indexes, and parent navigation with zero token cost. `--root` accepts target repository path.                                                                                                                                                                          |
 | **DoR, Semantic & Link Linter** | `powershell -NoProfile -File skills/ba-manage-requirement-artifacts/scripts/validate_requirements.ps1 --epic "<epic-folder-path>" --dor --semantic --terse` | Verifies Scrum DoR compliance, Gherkin syntax, semantic predicate definitions, fallback decision-table coverage, and relative link integrity. `--terse` emits 1-line actionable findings (`path: severity: issue`) crediting the `caveman-review` pattern. Use `--all` for repository-wide audits. |
 
 ---
@@ -145,6 +148,7 @@ Directly invoke these utilities using the exact CLI syntax below; do not inspect
 ## Terse Audit Findings Protocol (Crediting `caveman-review`)
 
 When auditing requirements, user stories, or PR deliverables, output findings in terse, 1-line format rather than verbose narrative:
+
 - **Format**: `<file>:L<line>: <emoji> <severity>: <problem>. <fix>.`
 - **Severities**: `🔴 error:` (DoR violation / broken AC), `🟡 warning:` (missing RAID or unquoted error string), `🔵 nit:` (styling / minor copy), `❓ q:` (unresolved question).
 - **Totals**: `totals: N🔴 N🟡 N🔵 N❓` or `No issues.`

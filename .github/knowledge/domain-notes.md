@@ -5,14 +5,14 @@
 ## Glossary
 
 | Term | Meaning |
-|---|---|
-| | |
+| ---- | ------- |
+|      |         |
 
 ## Key decisions log
 
 | Decision | Why | Made by | When |
-|---|---|---|---|
-| | | | |
+| -------- | --- | ------- | ---- |
+|          |     |         |      |
 
 ## Open questions
 

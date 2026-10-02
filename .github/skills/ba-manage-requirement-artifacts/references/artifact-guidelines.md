@@ -60,4 +60,3 @@ Read `references/user-story-guidelines.md`. Do not create or refine user stories
 - **Must include**: `status: draft | refinement | signed-off`, elicitation scope, PACT baseline & delta, answered questions, assumptions, unresolved parking-lot items, risks, decisions, and recommended next step.
 - **Lifecycle**: create one file under the target epic or under `output/elicitation/` and update its frontmatter status as discovery progresses.
 - **Avoid**: authoring physical user stories or GUI specs directly during elicitation before user confirmation and DoR checks.
-

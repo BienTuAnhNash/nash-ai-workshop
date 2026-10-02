@@ -1,9 +1,9 @@
 ---
 type: Requirement Epic
 status: draft
-description: "Template for the canonical epic file under output."
+description: 'Template for the canonical epic file under output.'
 tags: [requirement, epic]
-timestamp: "<ISO-8601 timestamp>"
+timestamp: '<ISO-8601 timestamp>'
 ---
 
 # Epic

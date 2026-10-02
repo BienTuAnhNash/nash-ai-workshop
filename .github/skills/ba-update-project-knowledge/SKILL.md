@@ -16,6 +16,7 @@ Top-level `.agent-artifacts/requirements/` is the delivery workbench for raw int
 ## Post-Update Indexing and Log Automation
 
 After changing project knowledge under `wiki/`, `solution-context/`, or `glossary/`:
+
 1. **Automated Index & Log Sync**: Run `powershell -NoProfile -File skills/ba-manage-requirement-artifacts/scripts/sync_indexes.ps1` (or let the post-write hook run it) to automatically update local `index.md` files and maintain link integrity with zero manual LLM effort.
 2. **Log Maintenance**: Append a newest-first entry to `.agent-artifacts/project-knowledge-base/log.md` (or pass `--log-entry "action|path|summary"` to `sync_indexes.ps1`).
 3. Require explicit user confirmation before making durable project-knowledge updates.
@@ -68,6 +69,7 @@ After changing project knowledge under `wiki/`, `solution-context/`, or `glossar
 ## Source Note Distillation & Compression Protocol (Crediting `caveman-compress`)
 
 When reading raw intake documents, client transcripts, or discovery notes to create or update durable wiki concept files:
+
 - **Eliminate Conversational Noise**: Strip pleasantries, social filler, conversational transitions ("Sure, let's look into this...", "I was thinking that maybe..."), hedging, and verbose narrative.
 - **Preserve Technical Precision Verbatim**: Never compress, abbreviate, or alter:
   - Code blocks, command lines, inline code (`backticks`).

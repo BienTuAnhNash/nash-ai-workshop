@@ -21,6 +21,7 @@ Rules for documenting request and response body fields for a single API.
 ## Field Descriptions
 
 For each field, explain:
+
 - What the field represents in business terms.
 - How the consumer or system uses it.
 - Required/optional status and nullability.
@@ -31,16 +32,16 @@ Avoid generic descriptions such as "status field" or "unique identifier" unless 
 
 ## Recommended Columns
 
-| Column | Purpose |
-|---|---|
-| Field Path | Full path from the body root, using dot notation and `[]` for arrays |
-| Description | Business meaning and usage |
-| Data Type | STRING, NUMBER, INTEGER, BOOLEAN, OBJECT, ARRAY, DATE, DATETIME, ENUM, or MIXED |
-| Required | Yes / No / Conditional |
-| Nullable | Yes / No |
-| Example | Representative value if known |
-| Validation / Constraints | Format, range, allowed values, condition, or rule |
-| Notes | Assumptions, lifecycle notes, or open questions |
+| Column                   | Purpose                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| Field Path               | Full path from the body root, using dot notation and `[]` for arrays            |
+| Description              | Business meaning and usage                                                      |
+| Data Type                | STRING, NUMBER, INTEGER, BOOLEAN, OBJECT, ARRAY, DATE, DATETIME, ENUM, or MIXED |
+| Required                 | Yes / No / Conditional                                                          |
+| Nullable                 | Yes / No                                                                        |
+| Example                  | Representative value if known                                                   |
+| Validation / Constraints | Format, range, allowed values, condition, or rule                               |
+| Notes                    | Assumptions, lifecycle notes, or open questions                                 |
 
 ## Validation Rules
 

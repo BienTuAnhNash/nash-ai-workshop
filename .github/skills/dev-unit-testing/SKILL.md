@@ -35,11 +35,11 @@ For each function or method, cover:
 
 Additionally:
 
-| Subject | Also cover |
-|---|---|
-| API endpoints | 200/201, 400, 401, 403, 404, 500 responses |
+| Subject       | Also cover                                                                   |
+| ------------- | ---------------------------------------------------------------------------- |
+| API endpoints | 200/201, 400, 401, 403, 404, 500 responses                                   |
 | UI components | Renders with props, user interaction, state change, loading and error states |
-| Bug fixes | A regression test that fails without the fix |
+| Bug fixes     | A regression test that fails without the fix                                 |
 
 ## Mocking rules
 

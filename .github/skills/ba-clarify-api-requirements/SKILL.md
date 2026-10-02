@@ -1,6 +1,6 @@
 ---
 name: ba-clarify-api-requirements
-description: "Clarifies API contracts, consumers, request/response payloads, field mappings, NFRs, edge cases, error behaviors, and change impact, and authors structured BA-friendly API specifications (`api-*.md`). Use when analyzing, clarifying, or authoring API endpoints, integration contracts, or backend interface specifications."
+description: 'Clarifies API contracts, consumers, request/response payloads, field mappings, NFRs, edge cases, error behaviors, and change impact, and authors structured BA-friendly API specifications (`api-*.md`). Use when analyzing, clarifying, or authoring API endpoints, integration contracts, or backend interface specifications.'
 ---
 
 # Clarify API Requirements
@@ -13,6 +13,7 @@ Executes end-to-end API requirement analysis, contract clarification, change imp
 ## References
 
 > Query these files on demand using progressive disclosure. Do not read entire files into context if a targeted lookup suffices:
+>
 > - **Specification Template**: [assets/api-specification-template.md](assets/api-specification-template.md) — canonical contract deliverable structure
 > - **Authoring Guidelines**: [references/api-specification-guidelines.md](references/api-specification-guidelines.md) — general spec rules, zero-fluff style, compact table syntax
 > - **Data Dictionary Rules**: [references/api-body-data-dictionary-guidelines.md](references/api-body-data-dictionary-guidelines.md) — request/response field dictionary standards
@@ -36,11 +37,13 @@ Executes end-to-end API requirement analysis, contract clarification, change imp
 Align steps, verification gates, and tooling with contract-first design principles (BABOK & OpenAPI conventions).
 
 ### Step 1: Solution & Provider Research (DRY / SSOT Scan)
+
 1. Run `ba-research-project-knowledge` to inspect `.agent-artifacts/project-knowledge-base/` (solution-context, wiki, glossary) and existing epic artifacts.
 2. Verify if the target endpoint, data entity, or integration contract already exists. Ensure single source of truth and eliminate duplicate endpoint definitions.
 3. Review existing Swagger/OpenAPI docs, payload samples, database schemas, or provider guidelines if available.
 
 ### Step 2: Contract & NFR Elicitation
+
 1. **Contract Clarification**: Clarify the core interaction dimensions:
    - Endpoint intent (HTTP verb, REST resource noun, action).
    - Request contract (headers, query/path parameters, request body).
@@ -55,12 +58,14 @@ Align steps, verification gates, and tooling with contract-first design principl
 4. **Question Discipline**: Ask 1–3 focused questions per turn, formulating each with a **Recommended Approach** and structured options with pros/cons.
 
 ### Step 3: Readiness Audit & Change Plan Gate
+
 1. Audit findings against [references/api-readiness-checklist.md](references/api-readiness-checklist.md) (10-point readiness check).
 2. **Approval Gate**:
    - **If invoked via Orchestrator (`ba`) under an approved Artifact Plan**: proceed directly to Step 4 without requesting duplicate plan confirmation.
    - **If invoked standalone**: present a formal **Change Plan** (Target file path `<epic-slug>/api-<slug>.md`, impacted models, DRY rationale, assumptions, consumer impact) and obtain explicit user approval before writing files.
 
 ### Step 4: Physical API Specification Authoring
+
 1. Instantiate [assets/api-specification-template.md](assets/api-specification-template.md) at `.agent-artifacts/requirements/output/<epic-slug>/api-<api-slug>.md`.
 2. Apply [references/api-specification-guidelines.md](references/api-specification-guidelines.md):
    - Section 1: HTTP Method and Endpoint table.
@@ -73,6 +78,7 @@ Align steps, verification gates, and tooling with contract-first design principl
 3. Enforce AI token optimization: use minimal 3-dash dividers (`|---|---|`) and omit cell-padding whitespace.
 
 ### Step 5: Post-Authoring Verification & Knowledge Update
+
 1. Inspect the written markdown file to verify valid links, table alignment, and schema completeness.
 2. If diagrams are required to illustrate multi-system sequence or state lifecycles, prepare diagram input and route to `ba-generate-diagram`.
 3. If new reusable domain models or integration endpoints were created, offer `ba-update-project-knowledge` to persist durable facts to the project knowledge base upon user confirmation.
@@ -80,18 +86,22 @@ Align steps, verification gates, and tooling with contract-first design principl
 ## Specialized Execution Modes
 
 ### Mode: API Change Impact Assessment
+
 When evaluating changes to existing endpoints or schemas:
+
 1. Follow [references/api-change-impact-rubric.md](references/api-change-impact-rubric.md).
 2. Classify changes as Breaking vs Non-Breaking across URIs, parameters, payloads, validation rules, and error codes.
 3. Generate an API Update Plan detailing affected specification files, consumer migration steps, and test updates.
 
 ### Mode: Diagram Planning
+
 When visual flow is needed to clarify integration complexity:
+
 - **Sequence Diagram**: Service-to-service interactions over time, token exchange, multi-step orchestration.
 - **Activity / Flowchart**: Complex branching decisions, conditional fallbacks.
 - **State Diagram**: Resource lifecycle transitions (e.g., `PENDING` $\rightarrow$ `PROCESSED` $\rightarrow$ `SETTLED`).
 - **ERD**: Entity relationships and database mapping schemas.
-Format the diagram request packet (audience, core questions, entities/actors) and hand off to `ba-generate-diagram`.
+  Format the diagram request packet (audience, core questions, entities/actors) and hand off to `ba-generate-diagram`.
 
 ## Conditional Branching & Fallbacks
 
@@ -105,9 +115,9 @@ Format the diagram request packet (audience, core questions, entities/actors) an
 ## Deliverables & Consumer Soundness
 
 - **Primary Consumers**:
-  - *Engineers & Architects*: Unambiguous `IF / ELSE` logic, concrete validation constraints, deterministic error codes, realistic sample payloads.
-  - *AI Subagents & Automated Linters*: Structured markdown tables, predictable headings, zero conversational prose, valid relative links.
-  - *Business Analysts & Product Owners*: Clear business summary, traceability to parent epic and user stories, explicit NFRs.
+  - _Engineers & Architects_: Unambiguous `IF / ELSE` logic, concrete validation constraints, deterministic error codes, realistic sample payloads.
+  - _AI Subagents & Automated Linters_: Structured markdown tables, predictable headings, zero conversational prose, valid relative links.
+  - _Business Analysts & Product Owners_: Clear business summary, traceability to parent epic and user stories, explicit NFRs.
 - **Physical Deliverable**:
   - Target Path: `.agent-artifacts/requirements/output/<epic-slug>/api-<api-slug>.md`
 

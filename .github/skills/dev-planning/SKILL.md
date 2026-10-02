@@ -9,11 +9,11 @@ Produce exactly **two files** per story: a **Plan** (the "how") and a **Task Lis
 
 ## When to run this
 
-| Situation | Run planning? |
-|---|---|
-| Story has no task list yet | Yes |
-| Ad-hoc change touching 3+ files | Yes |
-| Ad-hoc change touching 1–2 files | No — implement directly |
+| Situation                              | Run planning?                            |
+| -------------------------------------- | ---------------------------------------- |
+| Story has no task list yet             | Yes                                      |
+| Ad-hoc change touching 3+ files        | Yes                                      |
+| Ad-hoc change touching 1–2 files       | No — implement directly                  |
 | Task list already exists for the story | No — go straight to `dev-implementation` |
 
 ## Procedure
@@ -26,12 +26,12 @@ Produce exactly **two files** per story: a **Plan** (the "how") and a **Task Lis
 
 ### Step 2 — Determine scope
 
-| Signals | Scope |
-|---|---|
-| UI, page, component, screen, form, Figma URL | Frontend only |
-| API, endpoint, service, database, migration, entity | Backend only |
-| Both UI and API, or "end to end" | Full-stack |
-| Unclear | Ask before proceeding |
+| Signals                                             | Scope                 |
+| --------------------------------------------------- | --------------------- |
+| UI, page, component, screen, form, Figma URL        | Frontend only         |
+| API, endpoint, service, database, migration, entity | Backend only          |
+| Both UI and API, or "end to end"                    | Full-stack            |
+| Unclear                                             | Ask before proceeding |
 
 ### Step 3 — Analyse the existing codebase (mandatory)
 
@@ -56,9 +56,9 @@ If `instructions/tech-stack.md` is still unfilled, infer the conventions from th
 
 **Dev artifact root:** `docs/dev/` by default. If your pod's BA is using the `.agent-artifacts/` layout, use `.agent-artifacts/dev/` instead — pick one on day one and keep it.
 
-| File | Path |
-|---|---|
-| Plan | `docs/dev/{story-id}/plan.md` |
+| File  | Path                           |
+| ----- | ------------------------------ |
+| Plan  | `docs/dev/{story-id}/plan.md`  |
 | Tasks | `docs/dev/{story-id}/tasks.md` |
 
 ## Plan file sections
@@ -77,7 +77,7 @@ Include only the ones that are relevant to the slice:
 ```markdown
 # Tasks: {story-id} — Brief Description
 
-**Plan**: [plan.md](./plan.md)
+**Plan**: `plan.md`
 **Story**: {story-id}
 **Status**: Not Started
 
@@ -88,14 +88,14 @@ Include only the ones that are relevant to the slice:
 - [ ] 1. Short action description
   - Sub-step: what to implement
   - File: `path/to/file`
-  - Ref: [§3.1 Section Title](./plan.md#31-section-title)
+  - Ref: `§3.1 Section Title` in `plan.md`
 
 ## Frontend Tasks
 
 - [ ] 1. Short action description
   - Sub-step: what to implement
   - File: `path/to/file`
-  - Ref: [§3.3 Section Title](./plan.md#33-section-title)
+  - Ref: `§3.3 Section Title` in `plan.md`
 ```
 
 ### Rules

@@ -19,7 +19,7 @@ Create structured test cases for a user story's acceptance criteria.
 2. Read `docs/stories/{story-id}/requirement.md`. Extract description and acceptance criteria.
 3. Generate test cases per the rules below.
 4. Write the output to `docs/stories/{story-id}/testcase.md`.
-5. Re-read the output file and count totals using the procedure in *Verify totals*.
+5. Re-read the output file and count totals using the procedure in _Verify totals_.
 
 ## Test case rules
 

@@ -30,6 +30,7 @@ Rules for creating a generic BA-friendly API specification.
 ## Processing Rules
 
 Must use explicit `IF / ELSE` logic for:
+
 - Validation and error branches (e.g., `IF <field>` is missing, `THEN` return `400 Bad Request`).
 - Business rules and decision points (e.g., `IF <status> == 'ACTIVE'`, `THEN` call Provider A, `ELSE` call Provider B).
 - Data lookups, source-system calls, or downstream calls when relevant.

@@ -2,7 +2,7 @@
 
 Read this when a diagram needs a **specific shape** — a cloud-provider icon
 (AWS/Azure/GCP), a network/Cisco/Kubernetes symbol, a UML/BPMN/ER element, an
-electrical or P&ID part — or any time you'd otherwise *guess* a `style=` string.
+electrical or P&ID part — or any time you'd otherwise _guess_ a `style=` string.
 
 There are two ways to get a style:
 
@@ -60,8 +60,7 @@ python3 <this-skill-dir>/scripts/aiicons.py --list                  # all brands
 ```
 
 - Picks the `-color` variant when it exists, else the mono logo (e.g. OpenAI is
-  mono-only). Returns a square `image` style; use the reported `--size` (default
-  48) for both width and height.
+  mono-only). Returns a square `image` style; use the reported `--size` (default 48) for both width and height.
 - **Default references the icon by CDN URL** — the SVG lives on unpkg, not in
   this repo, so **draw.io needs network access when the diagram is rendered or
   opened**; an offline export draws a blank box. Pass `--embed` to fetch the SVG
@@ -81,64 +80,64 @@ These are stable enough to write without searching. Combine with `whiteSpace=wra
 
 ### Common shapes (`shape=` keyword)
 
-| Need | style |
-|---|---|
-| Rectangle / rounded box | `rounded=0;` / `rounded=1;` |
-| Circle / ellipse | `ellipse;` (`aspect=fixed;` for a true circle) |
-| Diamond (decision) | `rhombus;` |
-| Cylinder (database) | `shape=cylinder3;` |
-| Cloud | `cloud;` |
-| Cube (3D) | `shape=cube;` |
-| Sticky note | `shape=note;` |
-| Document (curled bottom) | `shape=document;` |
-| Folder | `shape=folder;` |
-| Card (cut corner) | `shape=card;` |
-| Process (double border) | `shape=process;` |
-| Step / chevron | `shape=step;` |
-| Parallelogram (I/O) | `shape=parallelogram;perimeter=parallelogramPerimeter;` |
-| Trapezoid | `shape=trapezoid;perimeter=trapezoidPerimeter;` |
-| Hexagon | `shape=hexagon;perimeter=hexagonPerimeter2;` |
-| Manual input | `shape=manualInput;` |
-| Data storage | `shape=dataStorage;` |
-| Off-page connector | `shape=offPageConnector;` |
-| Delay | `shape=delay;` |
-| OR / XOR gate | `shape=or;` / `shape=xor;` |
-| Block arrow | `shape=singleArrow;` / `shape=doubleArrow;` |
-| Callout (speech bubble) | `shape=callout;` |
+| Need                     | style                                                   |
+| ------------------------ | ------------------------------------------------------- |
+| Rectangle / rounded box  | `rounded=0;` / `rounded=1;`                             |
+| Circle / ellipse         | `ellipse;` (`aspect=fixed;` for a true circle)          |
+| Diamond (decision)       | `rhombus;`                                              |
+| Cylinder (database)      | `shape=cylinder3;`                                      |
+| Cloud                    | `cloud;`                                                |
+| Cube (3D)                | `shape=cube;`                                           |
+| Sticky note              | `shape=note;`                                           |
+| Document (curled bottom) | `shape=document;`                                       |
+| Folder                   | `shape=folder;`                                         |
+| Card (cut corner)        | `shape=card;`                                           |
+| Process (double border)  | `shape=process;`                                        |
+| Step / chevron           | `shape=step;`                                           |
+| Parallelogram (I/O)      | `shape=parallelogram;perimeter=parallelogramPerimeter;` |
+| Trapezoid                | `shape=trapezoid;perimeter=trapezoidPerimeter;`         |
+| Hexagon                  | `shape=hexagon;perimeter=hexagonPerimeter2;`            |
+| Manual input             | `shape=manualInput;`                                    |
+| Data storage             | `shape=dataStorage;`                                    |
+| Off-page connector       | `shape=offPageConnector;`                               |
+| Delay                    | `shape=delay;`                                          |
+| OR / XOR gate            | `shape=or;` / `shape=xor;`                              |
+| Block arrow              | `shape=singleArrow;` / `shape=doubleArrow;`             |
+| Callout (speech bubble)  | `shape=callout;`                                        |
 
 ### UML primitives
 
-| Element | style |
-|---|---|
-| Actor (stick figure) | `shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;` |
-| Boundary | `shape=umlBoundary;` |
-| Control | `shape=umlControl;` |
-| Entity | `shape=umlEntity;` |
-| Lifeline | `shape=umlLifeline;perimeter=lifelinePerimeter;container=1;` |
-| Frame | `shape=umlFrame;` |
-| Provided interface (lollipop) | `shape=lollipop;direction=south;` |
-| Required interface | `shape=requires;direction=north;` |
-| Component | `shape=component;` |
+| Element                       | style                                                            |
+| ----------------------------- | ---------------------------------------------------------------- |
+| Actor (stick figure)          | `shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;` |
+| Boundary                      | `shape=umlBoundary;`                                             |
+| Control                       | `shape=umlControl;`                                              |
+| Entity                        | `shape=umlEntity;`                                               |
+| Lifeline                      | `shape=umlLifeline;perimeter=lifelinePerimeter;container=1;`     |
+| Frame                         | `shape=umlFrame;`                                                |
+| Provided interface (lollipop) | `shape=lollipop;direction=south;`                                |
+| Required interface            | `shape=requires;direction=north;`                                |
+| Component                     | `shape=component;`                                               |
 
 ### Containers (parent-child; children use relative coords)
 
-| Type | style | When |
-|---|---|---|
-| Invisible group | `group;pointerEvents=0;` | No border, no own connections |
-| Titled swimlane | `swimlane;startSize=30;` | Visible title bar / has connections |
-| Any shape as container | append `container=1;pointerEvents=0;` | Box without own connections |
+| Type                   | style                                 | When                                |
+| ---------------------- | ------------------------------------- | ----------------------------------- |
+| Invisible group        | `group;pointerEvents=0;`              | No border, no own connections       |
+| Titled swimlane        | `swimlane;startSize=30;`              | Visible title bar / has connections |
+| Any shape as container | append `container=1;pointerEvents=0;` | Box without own connections         |
 
 ### Edges
 
-| Need | add to style |
-|---|---|
+| Need               | add to style                                                               |
+| ------------------ | -------------------------------------------------------------------------- |
 | Orthogonal routing | `edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;` |
-| Curved | `curved=1;` |
-| No arrowhead | `endArrow=none;` |
-| Open/thin arrow | `endArrow=open;` / `endArrow=classicThin;` |
-| Dashed | `dashed=1;` (pattern via `dashPattern=8 8;`) |
-| Flow animation | `flowAnimation=1;` |
-| Label background | `labelBackgroundColor=#ffffff;` |
+| Curved             | `curved=1;`                                                                |
+| No arrowhead       | `endArrow=none;`                                                           |
+| Open/thin arrow    | `endArrow=open;` / `endArrow=classicThin;`                                 |
+| Dashed             | `dashed=1;` (pattern via `dashPattern=8 8;`)                               |
+| Flow animation     | `flowAnimation=1;`                                                         |
+| Label background   | `labelBackgroundColor=#ffffff;`                                            |
 
 ### Useful property knobs
 

@@ -1,6 +1,6 @@
 # Developer Agent
 
-> **This persona works as-is.** Everything below is a default. Tailor the *Team customizes* section at the bottom once your pod has picked a stack — nothing above it needs editing to get started.
+> **This persona works as-is.** Everything below is a default. Tailor the _Team customizes_ section at the bottom once your pod has picked a stack — nothing above it needs editing to get started.
 
 ## Activates when
 
@@ -18,14 +18,14 @@ Turn requirements into an architecture, a task list, and working code — one th
 
 ## Skill routing
 
-| Trigger | Skill | Action |
-|---|---|---|
-| Task list exists for the story | [`dev-implementation`](../skills/dev-implementation/SKILL.md) | Work the task list top to bottom |
-| No task list, and the change spans 3+ files | [`dev-planning`](../skills/dev-planning/SKILL.md) → `dev-implementation` | Plan first, mob reviews the plan, then implement |
-| Slice finished, or "review this" / "check for vulnerabilities" | [`dev-code-review`](../skills/dev-code-review/SKILL.md) | Security → correctness → quality → performance |
-| Slice finished, or "write tests" / "add coverage" | [`dev-unit-testing`](../skills/dev-unit-testing/SKILL.md) | Write the suite for what was just built |
-| A Figma URL is explicitly provided | [`dev-figma-implement-design`](../skills/dev-figma-implement-design/SKILL.md) | Pull design context and assets from the Figma MCP |
-| Simple change, 1–2 files | *none* | Implement directly |
+| Trigger                                                        | Skill                                                                         | Action                                            |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------- |
+| Task list exists for the story                                 | [`dev-implementation`](../skills/dev-implementation/SKILL.md)                 | Work the task list top to bottom                  |
+| No task list, and the change spans 3+ files                    | [`dev-planning`](../skills/dev-planning/SKILL.md) → `dev-implementation`      | Plan first, mob reviews the plan, then implement  |
+| Slice finished, or "review this" / "check for vulnerabilities" | [`dev-code-review`](../skills/dev-code-review/SKILL.md)                       | Security → correctness → quality → performance    |
+| Slice finished, or "write tests" / "add coverage"              | [`dev-unit-testing`](../skills/dev-unit-testing/SKILL.md)                     | Write the suite for what was just built           |
+| A Figma URL is explicitly provided                             | [`dev-figma-implement-design`](../skills/dev-figma-implement-design/SKILL.md) | Pull design context and assets from the Figma MCP |
+| Simple change, 1–2 files                                       | _none_                                                                        | Implement directly                                |
 
 ## Workflow
 
@@ -53,11 +53,11 @@ Turn requirements into an architecture, a task list, and working code — one th
 
 ## Produces
 
-| Stage | Output |
-|---|---|
-| Design | `docs/design/*.md` — architecture doc and key decisions |
-| Task breakdown | `docs/stories/{story-id}/plan.md` + `tasks.md` |
-| Build | Working code + unit tests, committed in small slices |
+| Stage          | Output                                                  |
+| -------------- | ------------------------------------------------------- |
+| Design         | `docs/design/*.md` — architecture doc and key decisions |
+| Task breakdown | `docs/stories/{story-id}/plan.md` + `tasks.md`          |
+| Build          | Working code + unit tests, committed in small slices    |
 
 ## Constraints
 
@@ -90,5 +90,5 @@ Optional — the persona runs without any of this, but filling it in makes the a
 
 - [ ] Record the stack and its build/run/lint/test commands in [`../instructions/tech-stack.md`](../instructions/tech-stack.md) once picked
 - [ ] Folder structure conventions for this repo
-- [ ] Architectural constraints agreed at design time (e.g. "no external DB — local storage only", per [Part 02](../../workshop/02-decide-what-to-build.md) scope rules)
+- [ ] Architectural constraints agreed at design time (e.g. "no external DB — local storage only", per workshop Part 02 scope rules)
 - [ ] Any narrow stack skill your pod adds to [`../skills/`](../skills/README.md) — add a row to the routing table above

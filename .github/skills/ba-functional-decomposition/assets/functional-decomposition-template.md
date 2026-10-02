@@ -1,9 +1,9 @@
 ---
 type: Functional Decomposition
 status: draft
-description: "Canonical capability breakdown mapping confirmed elicitation output to initiatives, epics, and user story slices."
+description: 'Canonical capability breakdown mapping confirmed elicitation output to initiatives, epics, and user story slices.'
 tags: [requirement, decomposition, slicing]
-timestamp: "<ISO-8601 timestamp>"
+timestamp: '<ISO-8601 timestamp>'
 ---
 
 # Functional Decomposition
@@ -23,11 +23,12 @@ The `Initiative` field is optional: use it only on projects where epics roll up 
 
 ### User Stories
 
-| Story ID | Story Title | User Goal | Slicing Rationale |
-|---|---|---|---|---|
-| us-001 | <Story Title> | As a **<Actor>**, I want **<goal>** so that **<value>**. | <CRUD+L / Entry-Ripple / ZOMBIES rationale> |
+| Story ID | Story Title   | User Goal                                                | Slicing Rationale                           |
+| -------- | ------------- | -------------------------------------------------------- | ------------------------------------------- |
+| us-001   | <Story Title> | As a **<Actor>**, I want **<goal>** so that **<value>**. | <CRUD+L / Entry-Ripple / ZOMBIES rationale> |
 
 ### Open Slicing Questions
+
 - <Unresolved slicing question needing user or client confirmation, or `None`>
 
 ---

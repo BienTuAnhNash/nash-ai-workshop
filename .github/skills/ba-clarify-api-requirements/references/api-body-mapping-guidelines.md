@@ -30,6 +30,7 @@ Rules for documenting request and response body mappings for a single API.
 Use when fields from the API request are transformed, validated, enriched, or passed to another system, service, workflow, database, or downstream API.
 
 Recommended columns:
+
 - API Request Field Path
 - Source / Consumer Input
 - Target System / Field
@@ -42,6 +43,7 @@ Recommended columns:
 Use when API response fields are sourced or transformed from a database, upstream API, internal service, calculation, or static rule.
 
 Recommended columns:
+
 - API Response Field Path
 - Source System / Field
 - Transformation / Business Rule
@@ -60,6 +62,7 @@ Recommended columns:
 ## Multiple Sources & Null Fallbacks
 
 When a field depends on multiple sources or has null fallbacks:
+
 - Put the primary source in the Source column.
 - In Transformation/Fallback columns, write explicit logic: `IF <primary.source> IS NULL THEN fallback to <secondary.source>, ELSE map <primary.source>`.
 - Explain correlation keys, merge rules, fallback order, and failure behavior using explicit conditional logic.

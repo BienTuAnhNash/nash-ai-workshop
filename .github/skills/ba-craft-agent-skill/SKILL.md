@@ -1,11 +1,12 @@
 ---
 name: ba-craft-agent-skill
-description: "Create new custom agents and skills, update or refactor existing ones, distill session feedback and bug fixes into generalized architectural patterns, or review and audit existing agents and skills against architectural best practices"
+description: 'Create new custom agents and skills, update or refactor existing ones, distill session feedback and bug fixes into generalized architectural patterns, or review and audit existing agents and skills against architectural best practices'
 ---
 
 # Craft Agent & Skill
 
 Orchestrates the end-to-end lifecycle of custom agents (`.agent.md`) and procedural skills (`SKILL.md`):
+
 - **High-Performance Prompts**: Deliver clean execution flow with minimal token waste.
 - **Strict DRY & SSOT**: Enforce zero duplicated standards or shadow rules.
 - **Reliable Boundaries**: Maintain unambiguous triggers with clean handoffs.
@@ -34,9 +35,9 @@ All agents and skills designed or reviewed under this skill MUST strictly adhere
    - Keep the happy path linear. Isolate edge cases, non-interactive modes, and fallbacks using explicit `IF / THEN / ELSE` structures.
 6. **Consumer-Targeted Artifact Soundness**:
    - Format deliverables specifically for their primary consumer:
-     - *AI / Subagents*: Machine-parseable schemas (JSON/YAML), structured tables, zero conversational filler.
-     - *Code / Compilers*: Valid syntax, exact file paths, zero compile/lint errors.
-     - *Humans*: Scannable visual hierarchy, executive summaries, actionable next steps.
+     - _AI / Subagents_: Machine-parseable schemas (JSON/YAML), structured tables, zero conversational filler.
+     - _Code / Compilers_: Valid syntax, exact file paths, zero compile/lint errors.
+     - _Humans_: Scannable visual hierarchy, executive summaries, actionable next steps.
 7. **Pattern Generalization over Raw Patching**:
    - **De-parameterize**: Strip instance-specific ticket IDs, entity names, URLs, or one-off code snippets from session feedback.
    - **Abstract Invariants**: Formulate reusable, universal architectural rules in their authoritative SSOT file (see [references/session-distillation.md](references/session-distillation.md)).
@@ -63,11 +64,13 @@ All agents and skills designed or reviewed under this skill MUST strictly adhere
 Query these sub-documents using progressive disclosure:
 
 **Methodology & Rules (`references/`)**:
+
 - **Elicitation Questionnaire & Strategy**: [references/elicitation-guide.md](references/elicitation-guide.md)
 - **Session Distillation & Pattern Extraction**: [references/session-distillation.md](references/session-distillation.md)
 - **Comprehensive Review Rubric & Audit Template**: [references/review-rubric.md](references/review-rubric.md)
 
 **Scaffolding Blueprints (`assets/`)**:
+
 - **Agent Boilerplate Template**: [assets/agent.template.md](assets/agent.template.md)
 - **Skill Boilerplate Template**: [assets/skill.template.md](assets/skill.template.md)
 
@@ -77,32 +80,35 @@ Query these sub-documents using progressive disclosure:
 
 Identify the user's intent and follow the corresponding workflow:
 
-| Operating Mode | User Intent / Trigger | Core Workflow Steps |
-| :--- | :--- | :--- |
-| **Mode 1: Creation Mode** | Create new custom agent (`.agent.md`) or skill (`SKILL.md`) | 1. Elicitation Gate → 2. SSOT & Domain Research → 3. Scaffold & Draft → 4. Review Rubric Self-Audit |
-| **Mode 2: Update Mode** | Modify / refactor existing asset or distill session learnings | 1. Update Elicitation & Distillation → 2. Pre-Update Scan → 3. Targeted Refactoring → 4. Post-Update Verification |
-| **Mode 3: Review Mode** | Audit and diagnose agents, skills, or prompt architecture | 1. Scope & Goal Gate → 2. Deep Rubric Audit → 3. Conflict Matrix & Diff Report → 4. Refactoring Execution |
+| Operating Mode            | User Intent / Trigger                                         | Core Workflow Steps                                                                                               |
+| :------------------------ | :------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------- |
+| **Mode 1: Creation Mode** | Create new custom agent (`.agent.md`) or skill (`SKILL.md`)   | 1. Elicitation Gate → 2. SSOT & Domain Research → 3. Scaffold & Draft → 4. Review Rubric Self-Audit               |
+| **Mode 2: Update Mode**   | Modify / refactor existing asset or distill session learnings | 1. Update Elicitation & Distillation → 2. Pre-Update Scan → 3. Targeted Refactoring → 4. Post-Update Verification |
+| **Mode 3: Review Mode**   | Audit and diagnose agents, skills, or prompt architecture     | 1. Scope & Goal Gate → 2. Deep Rubric Audit → 3. Conflict Matrix & Diff Report → 4. Refactoring Execution         |
 
 ---
 
 ## Mode 1: Creating a New Agent or Skill
 
 ### Step 1: Mandatory Elicitation Gate
+
 Follow [references/elicitation-guide.md](references/elicitation-guide.md) before creating files or drafting prompts:
+
 - **Interpret First, Ask Only What Cannot Be Inferred**: Extract all known requirements, roles, boundaries, and tools from prompt and workspace context first.
 - **No Pure Open-Ended Questions**: Present every question with a **Recommended Approach** (grounded in pre-researched best practice) alongside structured **Options with Pros & Cons**.
 - **Discovery Scope**:
-  1. *Unified Core Discovery (All Assets)*: Primary objective & bottleneck, governing industry standards (seeded via quick web search), activation triggers & preconditions, inputs & consumer-targeted deliverables (AI/Code/Human), and the end-to-end manual workflow with verification checkpoints.
-  2. *Component-Specific Extensions*:
+  1. _Unified Core Discovery (All Assets)_: Primary objective & bottleneck, governing industry standards (seeded via quick web search), activation triggers & preconditions, inputs & consumer-targeted deliverables (AI/Code/Human), and the end-to-end manual workflow with verification checkpoints.
+  2. _Component-Specific Extensions_:
      - **For an Agent**: Assigned persona profile (identity, domain depth, tone, operational mindset), mounted skills, tool permissions (`tools: [- web, ...]`), agent handoffs, and non-interactive safeguards.
      - **For a Skill**: Specific CLI commands/scripts, helper scripts in `scripts/`, and progressive disclosure offloading into `references/`.
-  3. *Script Automation, Parallelism & Token Savings Discovery*:
+  3. _Script Automation, Parallelism & Token Savings Discovery_:
      - Identify deterministic steps (research, entity extraction, artifact CRUD, index syncing, review checklist audits) to offload to `scripts/`.
      - Plan parallel execution with a wait-for-all barrier for multi-faceted tasks to capture the complete 360° picture.
      - Identify execution loop risks (retry caps, recursion limits) and redundant reads to enforce single-pass traversal.
 - **Discipline Rule**: Ask **2–4 high-impact questions per turn**. **Never assume the manual workflow**.
 
 ### Step 2: Workspace Conflict Scan & Industry Best Practice Research
+
 1. **Workspace Conflict & SSOT Scan**:
    - Scan workspace directories (`agents/`, `skills/`, `.github/instructions/`):
      - **Overlap Detection**: Verify whether an existing agent or skill already covers this domain or intent.
@@ -114,11 +120,12 @@ Follow [references/elicitation-guide.md](references/elicitation-guide.md) before
      - Run high-signal searches: `"<domain/task> industry best practices"`, `"<standard name> specification"`, `"<methodology> workflow steps and quality gates"`.
      - Inspect authoritative links and standard specifications (IIBA, W3C, ISO, OpenAPI, OWASP) for standard phases, checklists, verification gates, schema formats, and anti-patterns.
    - **Synthesize Battle-Tested Heuristics**: Integrate researched best practices directly into:
-     - *Agent Persona & Principles*: Ground persona in recognized professional standards (specialization, methodology, operational mindset).
-     - *Execution Workflow*: Structure steps according to industry-standard phases and verification checkpoints.
-     - *Deliverable Standards*: Enforce industry-standard output schemas and conventions for the target consumer.
+     - _Agent Persona & Principles_: Ground persona in recognized professional standards (specialization, methodology, operational mindset).
+     - _Execution Workflow_: Structure steps according to industry-standard phases and verification checkpoints.
+     - _Deliverable Standards_: Enforce industry-standard output schemas and conventions for the target consumer.
 
 ### Step 3: Scaffold & Draft
+
 1. **Instantiate Template**:
    - **For an Agent**: Instantiate [assets/agent.template.md](assets/agent.template.md) to `agents/<name>.agent.md`. Mandate an explicit Assigned Persona Profile (identity, domain depth, professional tone, operational mindset) to establish authoritative leadership; never allow generic assistant framing.
    - **For a Skill**: Instantiate [assets/skill.template.md](assets/skill.template.md) to `skills/<name>/SKILL.md` (and optional `references/` or `scripts/`). Structure steps and verification commands according to industry best practices.
@@ -130,7 +137,9 @@ Follow [references/elicitation-guide.md](references/elicitation-guide.md) before
    - Enforce anti-loop guards (max retries, recursion limits) and read-optimization (targeted excerpts, caching).
 
 ### Step 4: Mandatory Review Rubric Self-Audit Gate
+
 Run a self-audit against [references/review-rubric.md](references/review-rubric.md) before finalizing or saving files:
+
 - [ ] **Baseline 1 (Trigger Soundness & Assigned Persona)**: Unambiguous `description`, clean activation boundaries, zero overlap, and explicit assigned agent persona (no generic assistant framing).
 - [ ] **Baseline 2 (DRY & SSOT)**: Zero copy-pasted rules; points directly to centralized instruction files.
 - [ ] **Baseline 3 (Token Economy & Script Offloading)**: Zero conversational filler, formatting micromanagement, or canned speech; deterministic tasks offloaded to `scripts/`.
@@ -143,25 +152,30 @@ Run a self-audit against [references/review-rubric.md](references/review-rubric.
 ## Mode 2: Updating an Existing Agent or Skill
 
 ### Step 1: Update Elicitation & Session Distillation Gate
+
 Elicit modification intent before editing files:
+
 - **From Explicit User Requirements**:
   - **Drivers**: Identify update triggers (new capability, convention updates, hallucination fix, token optimization).
   - **Scope**: Identify what must change vs what must remain strictly untouched.
   - **Dependencies**: Determine if cross-references, dependent agents, or downstream consumers are affected.
   - **Script Automation Opportunities**: Evaluate if procedural steps (grep, repetitive file CRUD, index updating, checklist reviews) can be offloaded to scripts in `scripts/`.
 - **From Chat Session Feedback / Learnings ("Session Distillation")**:
-  - **Audit Friction & Trajectory**: Inspect recent session history for *Inefficiencies* (slow linear operations, unscripted deterministic tasks), *Unnecessary Steps* (redundant reads, duplicate tool calls, filler), and *Wrong Steps* (false assumptions, hallucinated parameters, premature decisions; see [references/session-distillation.md](references/session-distillation.md)).
+  - **Audit Friction & Trajectory**: Inspect recent session history for _Inefficiencies_ (slow linear operations, unscripted deterministic tasks), _Unnecessary Steps_ (redundant reads, duplicate tool calls, filler), and _Wrong Steps_ (false assumptions, hallucinated parameters, premature decisions; see [references/session-distillation.md](references/session-distillation.md)).
   - **De-parameterize**: Strip instance-specific ticket IDs, entity names, URLs, and raw error messages to extract the root invariant.
   - **Confirm with User**: Present synthesized invariant, target SSOT file, and proposed changes before editing:
-    > *"Based on our session, I distilled this recurring invariant: **[rule]**. I propose updating **[target file]**. Does this capture your intent?"*
+    > _"Based on our session, I distilled this recurring invariant: **[rule]**. I propose updating **[target file]**. Does this capture your intent?"_
 
 ### Step 2: Pre-Update Rubric Diagnostic Scan
+
 Run a diagnostic scan against [references/review-rubric.md](references/review-rubric.md):
+
 - Detect latent anti-patterns, missing personas, deterministic token burn, or missing script automation.
 - Verify loop breakers and read-optimization to prevent infinite loops and redundant full-file reads.
 - Ensure planned edits avoid compounding prompt bloat.
 
 ### Step 3: Apply Targeted Refactoring (Zero Raw Patching)
+
 1. **Apply Abstracted Invariants**: Never patch raw session tokens, ticket IDs, or transient error strings as-is.
 2. **Uphold SSOT Placement (Single Home)**: Route updates strictly to ONE authoritative file. Never scatter duplicate or paraphrased copies; dependent components must link to this source.
 3. **Perform Surgical Edits**: Avoid inserting verbose paragraphs or verbatim conversational logs.
@@ -169,7 +183,9 @@ Run a diagnostic scan against [references/review-rubric.md](references/review-ru
 5. **Preserve Consumer Soundness**: Ensure deliverable contracts fulfill downstream requirements (AI, Code, Human).
 
 ### Step 4: Post-Update Rubric Verification & Creative Polish
+
 Re-evaluate the updated asset against [references/review-rubric.md](references/review-rubric.md):
+
 - **Integrity**: Confirm trigger boundaries, assigned persona sharpness, instruction flow, and artifact fitness remain intact.
 - **Token Economy & Velocity**: Verify optimal token usage, script offloading, parallel script execution with wait-for-all synchronization, and zero instance-specific session tokens leaked into prompts.
 - **Loop & Read Resilience**: Confirm hard loop breakers exist and redundant full-file reads are eliminated.
@@ -180,7 +196,9 @@ Re-evaluate the updated asset against [references/review-rubric.md](references/r
 ## Mode 3: Reviewing User-Specified Agents & Skills
 
 ### Step 1: Elicitation & Scope Alignment
+
 When user requests an audit of agents, skills, or prompt architecture:
+
 1. **Target Confirmation**: Identify specific target files (`.agent.md`, `SKILL.md`) or define workspace-wide scope.
 2. **Elicit Context**:
    - **Observed Friction**: Identify confusing behaviors, hallucinations, execution loops, or token bottlenecks.
@@ -190,26 +208,21 @@ When user requests an audit of agents, skills, or prompt architecture:
    - **Output Delivery**: Confirm whether user wants recommendations only, or refactored files and diffs directly.
 
 ### Step 2: Comprehensive Multi-Dimensional Audit
+
 Evaluate target files against [references/review-rubric.md](references/review-rubric.md):
+
 - **Foundational Dimensions**:
   1. Trigger Soundness, Scope Boundary & Assigned Persona Profile
   2. Strict DRY & SSOT Compliance
   3. Token Optimization, Prompt Bloat Reduction & Script Offloading
   4. Instruction Flow, Conditional Branching & Anti-Loop Safeguards
   5. Actionability, Verification & Consumer Artifact Soundness (AI / Code / Human)
-- **Creative Open-Ended Dimensions**:
-  6. Cognitive Ergonomics & Developer Experience (DX)
-  7. Model Steering & Hallucination Resilience
-  8. Multi-Agent Synergy & Swarm Orchestration
-  9. Extensibility & Evolutionary Design
-  10. Workflow Innovation, Script Automation & 10x Velocity Leaps:
-      - *Instruction Execution Automation*: Offloading research, search, entity extraction, and artifact CRUD to companion scripts.
-      - *Review Checklist Automation*: Offloading deterministic validation and DoR/DoD checks to automated scripts before LLM qualitative review.
-      - *Parallel Script Execution*: Running multi-faceted scripts concurrently with a mandatory wait-for-all barrier.
-      - *Loop & Unnecessary Read Safeguards*: Enforcing recursion depth limits, retry caps, and targeted excerpt/index reading over massive full-file reads.
+- **Creative Open-Ended Dimensions**: 6. Cognitive Ergonomics & Developer Experience (DX) 7. Model Steering & Hallucination Resilience 8. Multi-Agent Synergy & Swarm Orchestration 9. Extensibility & Evolutionary Design 10. Workflow Innovation, Script Automation & 10x Velocity Leaps: - _Instruction Execution Automation_: Offloading research, search, entity extraction, and artifact CRUD to companion scripts. - _Review Checklist Automation_: Offloading deterministic validation and DoR/DoD checks to automated scripts before LLM qualitative review. - _Parallel Script Execution_: Running multi-faceted scripts concurrently with a mandatory wait-for-all barrier. - _Loop & Unnecessary Read Safeguards_: Enforcing recursion depth limits, retry caps, and targeted excerpt/index reading over massive full-file reads.
 
 ### Step 3: Generate Structured Audit Report
+
 Format findings using a **compact, numbered table** to keep responses lean and directly referenceable:
+
 - **Executive Summary**: Health score, key strengths, and primary architectural risks.
 - **Audited Files & Roles**: Table of audited files, current triggers, and designated owners.
 - **Actionable Numbered Findings Table**:
@@ -224,7 +237,9 @@ Format findings using a **compact, numbered table** to keep responses lean and d
   - Prompt user to select specific finding IDs to apply.
 
 ### Step 4: Execute Approved Refactoring
+
 Apply refactored changes upon user confirmation:
+
 - Preserve workspace naming and structure conventions.
 - Implement recommended helper scripts in `scripts/` where approved.
 - Update all cross-references across dependent agents and skills.

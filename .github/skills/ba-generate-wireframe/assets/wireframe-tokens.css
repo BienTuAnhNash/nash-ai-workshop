@@ -3,11 +3,14 @@
    ========================================================================== */
 
 :root {
-  --wf-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --wf-font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-  
+  --wf-font-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  --wf-font-mono:
+    ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+
   /* Grayscale Palette */
-  --wf-gray-50:  #f8fafc;
+  --wf-gray-50: #f8fafc;
   --wf-gray-100: #f1f5f9;
   --wf-gray-200: #e2e8f0;
   --wf-gray-300: #cbd5e1;
@@ -17,7 +20,7 @@
   --wf-gray-700: #334155;
   --wf-gray-800: #1e293b;
   --wf-gray-900: #0f172a;
-  
+
   /* Wireframe Accent */
   --wf-primary: #2563eb;
   --wf-primary-hover: #1d4ed8;
@@ -41,7 +44,9 @@
   --wf-border: 1px solid var(--wf-gray-300);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -145,7 +150,9 @@ body {
   color: var(--wf-danger);
 }
 
-.wf-input, .wf-select, .wf-textarea {
+.wf-input,
+.wf-select,
+.wf-textarea {
   width: 100%;
   padding: var(--wf-space-2) var(--wf-space-3);
   font-size: 0.875rem;
@@ -155,7 +162,9 @@ body {
   color: var(--wf-gray-800);
 }
 
-.wf-input:focus, .wf-select:focus, .wf-textarea:focus {
+.wf-input:focus,
+.wf-select:focus,
+.wf-textarea:focus {
   outline: 2px solid var(--wf-primary);
   outline-offset: -1px;
 }
@@ -193,7 +202,8 @@ body {
   font-size: 0.875rem;
 }
 
-.wf-table th, .wf-table td {
+.wf-table th,
+.wf-table td {
   padding: var(--wf-space-3) var(--wf-space-4);
   border-bottom: var(--wf-border);
 }
@@ -215,9 +225,18 @@ body {
   color: var(--wf-gray-700);
 }
 
-.wf-badge-success { background: #dcfce7; color: #15803d; }
-.wf-badge-warning { background: #fef3c7; color: #b45309; }
-.wf-badge-danger  { background: #fee2e2; color: #b91c1c; }
+.wf-badge-success {
+  background: #dcfce7;
+  color: #15803d;
+}
+.wf-badge-warning {
+  background: #fef3c7;
+  color: #b45309;
+}
+.wf-badge-danger {
+  background: #fee2e2;
+  color: #b91c1c;
+}
 
 /* Responsive Grid */
 .wf-grid-2 {

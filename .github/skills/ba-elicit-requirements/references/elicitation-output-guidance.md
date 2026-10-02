@@ -56,12 +56,12 @@
 
 ### Handoff Status
 
-| `status` | `elicitation_status` | Meaning |
-|---|---|---|
-| `refinement` | `IN_PROGRESS` | Material gaps remain; continue discovery. |
-| `refinement` | `COMPLETE` | Readiness criteria met; awaiting stakeholder confirmation. |
-| `signed-off` | `COMPLETE` | Stakeholder confirmed the session content and accepted any deferred risks; downstream handoff allowed. |
-| `signed-off` | `IN_PROGRESS` | Invalid; return to refinement before further use. |
+| `status`     | `elicitation_status` | Meaning                                                                                                |
+| ------------ | -------------------- | ------------------------------------------------------------------------------------------------------ |
+| `refinement` | `IN_PROGRESS`        | Material gaps remain; continue discovery.                                                              |
+| `refinement` | `COMPLETE`           | Readiness criteria met; awaiting stakeholder confirmation.                                             |
+| `signed-off` | `COMPLETE`           | Stakeholder confirmed the session content and accepted any deferred risks; downstream handoff allowed. |
+| `signed-off` | `IN_PROGRESS`        | Invalid; return to refinement before further use.                                                      |
 
 - Set `signed-off` only after explicit stakeholder confirmation of the current session content. A request to start or wrap up is not sign-off. If confirmed scope changes, return to refinement and reassess readiness; retain unchanged confirmed facts.
 - `elicitation_status` tracks readiness; `status` tracks stakeholder sign-off. Downstream handoff requires both `COMPLETE` and `signed-off`. `COMPLETE` means every material question was answered or intentionally deferred with an acknowledged risk; `IN_PROGRESS` means material questions remain open and unaddressed.

@@ -1,6 +1,6 @@
 ---
 name: ba-onboard-project-context
-description: "Audits workspace environment, discovers and maps existing knowledge bases (Confluence, SharePoint, Markdown, Word, PDF) into .agent-artifacts/project-knowledge-base/ via hybrid progressive sync, configures Jira and Azure DevOps MCP connections and custom field mappings, and customizes BA workspace instructions and Definition of Ready (DoR) gates. Use when onboarding a new or existing repository to the BA Accelerator, migrating legacy documentation, or calibrating Jira/ADO ALM integration."
+description: 'Audits workspace environment, discovers and maps existing knowledge bases (Confluence, SharePoint, Markdown, Word, PDF) into .agent-artifacts/project-knowledge-base/ via hybrid progressive sync, configures Jira and Azure DevOps MCP connections and custom field mappings, and customizes BA workspace instructions and Definition of Ready (DoR) gates. Use when onboarding a new or existing repository to the BA Accelerator, migrating legacy documentation, or calibrating Jira/ADO ALM integration.'
 ---
 
 # Onboard Project Context Skill
@@ -13,6 +13,7 @@ Orchestrates the rapid adoption of the BA Accelerator framework into an existing
 ## References & Assets
 
 > Query these files on demand using progressive disclosure. Do not read entire files into context if a targeted lookup suffices:
+>
 > - **Onboarding Plan Template**: [assets/onboarding-plan.template.md](assets/onboarding-plan.template.md) — high-level plan blueprint and user review gate
 > - **Onboarding Review Checklist Template**: [assets/onboarding-review-checklist.template.md](assets/onboarding-review-checklist.template.md) — physical sign-off checklist artifact template
 > - **Onboarding Readiness Rubric**: [references/onboarding-rubric.md](references/onboarding-rubric.md) — 4-pillar checklist for project onboarding readiness
@@ -34,31 +35,34 @@ Orchestrates the rapid adoption of the BA Accelerator framework into an existing
 ## Procedure
 
 ### Step 1: Target Project Path Verification Gate (Stop & Ask)
+
 1. Inspect the user prompt for an explicit project folder or repository path.
 2. **If path is missing or ambiguous**:
    - **STOP IMMEDIATELY**.
    - Invoke the `ask_question` tool:
-     - **Question**: *"Which project repository or folder would you like to onboard into the BA Accelerator?"*
-     - **Option 1 (Recommended)**: *"Current workspace root (`./`)"*
-     - **Option 2**: *"[Select detected sibling repository] (e.g. `../<sibling-repo>`)"*
-     - **Option 3**: *"[Enter custom project folder path]"*
+     - **Question**: _"Which project repository or folder would you like to onboard into the BA Accelerator?"_
+     - **Option 1 (Recommended)**: _"Current workspace root (`./`)"_
+     - **Option 2**: _"[Select detected sibling repository] (e.g. `../<sibling-repo>`)"_
+     - **Option 3**: _"[Enter custom project folder path]"_
    - Wait for the user's selection before initiating any scans or authoring tasks.
 
 ### Step 2: Artifact Hosting Location & Script Commit Policy Gate (Stop & Confirm)
+
 1. Invoke the `ask_question` tool to determine hosting topology:
-   - **Question**: *"Where should BA artifacts (`.agent-artifacts/`) and automation skills be hosted?"*
-   - **Option 1 (Recommended)**: *"Dedicated non-source repo / folder (e.g. separate requirements repository or shared BA folder)"*
-   - **Option 2**: *"Directly inside the application source code repository"*
+   - **Question**: _"Where should BA artifacts (`.agent-artifacts/`) and automation skills be hosted?"_
+   - **Option 1 (Recommended)**: _"Dedicated non-source repo / folder (e.g. separate requirements repository or shared BA folder)"_
+   - **Option 2**: _"Directly inside the application source code repository"_
 2. **If Option 2 (Inside application source repo) is selected**:
    - Prompt the user with a mandatory script commit permission question:
-     - **Question**: *"Are you permitted to commit BA automation scripts (`skills/*/scripts/`) and `.agent-artifacts/` directly into this application source code repository?"*
-     - **Option 1 (Permitted)**: *"Yes, commit scripts and artifacts directly into source control."*
-     - **Option 2 (Restricted / Configure .gitignore)**: *"No, keep source control clean. Add scripts and `.agent-artifacts/` to `.gitignore`."*
+     - **Question**: _"Are you permitted to commit BA automation scripts (`skills/_/scripts/`) and `.agent-artifacts/` directly into this application source code repository?"\*
+     - **Option 1 (Permitted)**: _"Yes, commit scripts and artifacts directly into source control."_
+     - **Option 2 (Restricted / Configure .gitignore)**: _"No, keep source control clean. Add scripts and `.agent-artifacts/` to `.gitignore`."_
 3. **Action Based on User Response**:
    - If restricted: Append `.agent-artifacts/` and `skills/*/scripts/` to `.gitignore` in the target project root and document the local-only script execution policy in `project-summary.md`.
    - If permitted or hosted in a dedicated repo: Document the confirmed hosting topology and script commit policy in `project-summary.md`.
 
 ### Step 3: Pre-Flight Environment Discovery & Workspace Audit
+
 1. Inspect the confirmed target repository directly. Inventory documentation folders, inspect Git history and branches for backlog identifiers, and check BA artifacts and repository topology. Exclude dependency, build, and Git internals from the documentation inventory.
 2. Record evidence from that inspection to identify:
    - **Accelerator Baseline**: Presence of `project-summary.md` and status of `.agent-artifacts/`.
@@ -68,22 +72,25 @@ Orchestrates the rapid adoption of the BA Accelerator framework into an existing
 3. Present an executive summary of the environment findings to the user.
 
 ### Step 4: High-Level Onboarding Plan & User Approval Gate
+
 Before authoring any files, generating stubs, or modifying configurations, formulate a structured **High-Level Onboarding Plan** based on [assets/onboarding-plan.template.md](assets/onboarding-plan.template.md):
 
-| Phase | Proposed Action | Target Component / File | Source / Baseline Context | Notes / Dependencies |
-|---|---|---|---|---|
-| **1. Artifact Topology & Script Commit Policy** | `HOST_DEDICATED` \| `HOST_SRC_REPO` | `.agent-artifacts/` & `scripts/` | Dedicated BA repo vs Source Code repo | Script commit permission confirmed or `.gitignore` configured |
-| **2. Knowledge Ingestion** | `MAP_STUBS` \| `SKIP` | `.agent-artifacts/project-knowledge-base/wiki/` | Discovered doc folders (`docs/`, `wiki/`) | Progressive hybrid stubs linking to source docs |
-| **3. Glossary Extraction** | `EXTRACT` \| `SKIP` | `.agent-artifacts/project-knowledge-base/glossary/` | Source documents / acronyms | Nouns, actors, and domain terminology |
-| **4. Solution Baseline** | `CREATE` \| `UPDATE` | `project-summary.md` | Manifests, README, SOW, Architecture | Core system overview, tech stack, SOW boundaries, Script commit policy |
-| **5. Backlog ALM Integration** | `CALIBRATE` \| `DORMANT` | `skills/ba-sync-backlog/references/` | Jira Key or ADO Area Path | MCP pre-flight and custom field mapping |
-| **6. Workflow & DoR Calibration** | `ALIGN` \| `DEFAULT` | `instructions/ba-agent-rules.md` | Team Agile / Scrum conventions | 3-tier Gherkin ACs and Artifact Plan gates |
+| Phase                                           | Proposed Action                     | Target Component / File                             | Source / Baseline Context                 | Notes / Dependencies                                                   |
+| ----------------------------------------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------- |
+| **1. Artifact Topology & Script Commit Policy** | `HOST_DEDICATED` \| `HOST_SRC_REPO` | `.agent-artifacts/` & `scripts/`                    | Dedicated BA repo vs Source Code repo     | Script commit permission confirmed or `.gitignore` configured          |
+| **2. Knowledge Ingestion**                      | `MAP_STUBS` \| `SKIP`               | `.agent-artifacts/project-knowledge-base/wiki/`     | Discovered doc folders (`docs/`, `wiki/`) | Progressive hybrid stubs linking to source docs                        |
+| **3. Glossary Extraction**                      | `EXTRACT` \| `SKIP`                 | `.agent-artifacts/project-knowledge-base/glossary/` | Source documents / acronyms               | Nouns, actors, and domain terminology                                  |
+| **4. Solution Baseline**                        | `CREATE` \| `UPDATE`                | `project-summary.md`                                | Manifests, README, SOW, Architecture      | Core system overview, tech stack, SOW boundaries, Script commit policy |
+| **5. Backlog ALM Integration**                  | `CALIBRATE` \| `DORMANT`            | `skills/ba-sync-backlog/references/`                | Jira Key or ADO Area Path                 | MCP pre-flight and custom field mapping                                |
+| **6. Workflow & DoR Calibration**               | `ALIGN` \| `DEFAULT`                | `instructions/ba-agent-rules.md`                    | Team Agile / Scrum conventions            | 3-tier Gherkin ACs and Artifact Plan gates                             |
 
 **Mandatory Gate**: Present this plan to the user and prompt:
-> *"Please review the proposed Onboarding Plan above. You can update any actions, exclude specific documentation folders, or customize the target Jira/ADO settings. Reply with **'Proceed'** to execute step by step, or specify any adjustments you would like to make."*
-**HALT execution and wait for user confirmation before proceeding.**
+
+> _"Please review the proposed Onboarding Plan above. You can update any actions, exclude specific documentation folders, or customize the target Jira/ADO settings. Reply with **'Proceed'** to execute step by step, or specify any adjustments you would like to make."_
+> **HALT execution and wait for user confirmation before proceeding.**
 
 ### Step 5: Step-by-Step Execution
+
 Once the user confirms the plan, execute each approved phase sequentially:
 
 1. **Step 5.1: Hybrid Knowledge Ingestion & Indexing**:
@@ -108,6 +115,7 @@ Once the user confirms the plan, execute each approved phase sequentially:
    - If MCP is offline: Record dormant configuration and reference [references/jira-ado-setup-guide.md](references/jira-ado-setup-guide.md).
 
 ### Step 6: Automated Verification & Review Checklist
+
 1. Execute the automated onboarding verification script:
    ```powershell
    powershell -NoProfile -File skills/ba-onboard-project-context/scripts/verify_onboarding.ps1 --output .agent-artifacts/onboarding-review-checklist.md
@@ -116,6 +124,7 @@ Once the user confirms the plan, execute each approved phase sequentially:
 3. Verify that all critical checkpoints (`[PASS]`) are satisfied.
 
 ### Step 7: Guided Smoke Testing & Test-Drive ("Test it out")
+
 Guide the user through immediate interactive smoke testing to verify the end-to-end setup before regular delivery begins:
 
 1. **Test Drive 1: Knowledge Base Search Test**:
@@ -128,7 +137,7 @@ Guide the user through immediate interactive smoke testing to verify the end-to-
    - Run a sample read-only query (e.g. fetching an issue or sprint scope via MCP) to confirm API token permissions.
 3. **Test Drive 3: Orchestrator Test-Drive with `@business-analyst`**:
    - Provide a copy-pasteable test prompt for the user to try with `@business-analyst`:
-     > *"@business-analyst I need to analyze a new feature for [Feature/Module]. Please review our project summary and search our knowledge base to establish the baseline scope."*
+     > _"@business-analyst I need to analyze a new feature for [Feature/Module]. Please review our project summary and search our knowledge base to establish the baseline scope."_
    - Verify that `@business-analyst` reads `project-summary.md`, searches the stubs, and initiates the elicitation gate.
 
 ---
@@ -155,8 +164,8 @@ Guide the user through immediate interactive smoke testing to verify the end-to-
 ## Deliverables & Consumer Soundness
 
 - **Primary Consumers**:
-  - *Business Analysts & Delivery Leads*: Clear onboarding status report, customized `project-summary.md`, verified review checklist, and immediate delivery readiness.
-  - *AI Agents (`@business-analyst`)*: Token-optimized Knowledge Base stubs with source pointers and calibrated field mappings.
+  - _Business Analysts & Delivery Leads_: Clear onboarding status report, customized `project-summary.md`, verified review checklist, and immediate delivery readiness.
+  - _AI Agents (`@business-analyst`)_: Token-optimized Knowledge Base stubs with source pointers and calibrated field mappings.
 - **Physical Deliverables**:
   - Root `project-summary.md`.
   - Onboarding Review Checklist: `.agent-artifacts/onboarding-review-checklist.md`.
@@ -168,10 +177,10 @@ Guide the user through immediate interactive smoke testing to verify the end-to-
 
 Directly invoke these utilities using the exact CLI syntax below; do not inspect script source code unless diagnosing an execution error:
 
-| Utility | Script Command | Description |
-|---|---|---|
-| **Knowledge Base Mapper** | `powershell -NoProfile -File skills/ba-onboard-project-context/scripts/map_knowledge_base.ps1 --source "<path-to-docs>"` | Scans external/internal docs and generates hybrid progressive summary stubs linking back to originals. |
-| **Onboarding Verifier** | `powershell -NoProfile -File skills/ba-onboard-project-context/scripts/verify_onboarding.ps1 --output .agent-artifacts/onboarding-review-checklist.md` | Validates end-to-end onboarding completeness and outputs review checklist. |
+| Utility                   | Script Command                                                                                                                                         | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| **Knowledge Base Mapper** | `powershell -NoProfile -File skills/ba-onboard-project-context/scripts/map_knowledge_base.ps1 --source "<path-to-docs>"`                               | Scans external/internal docs and generates hybrid progressive summary stubs linking back to originals. |
+| **Onboarding Verifier**   | `powershell -NoProfile -File skills/ba-onboard-project-context/scripts/verify_onboarding.ps1 --output .agent-artifacts/onboarding-review-checklist.md` | Validates end-to-end onboarding completeness and outputs review checklist.                             |
 
 ---
 

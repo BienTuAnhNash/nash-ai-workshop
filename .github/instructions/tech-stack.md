@@ -1,6 +1,6 @@
 # Tech Stack Rules
 
-> Every persona reads this file before acting. It has **working defaults**, so agents never stall on it — but the more of the top half your pod fills in during [Part 03 — Harness Setup](../../workshop/03-harness-setup.md), the less the agent has to infer.
+> Every persona reads this file before acting. It has **working defaults**, so agents never stall on it — but the more of the top half your pod fills in during workshop Part 03 (Harness Setup), the less the agent has to infer.
 
 ## Status
 
@@ -16,43 +16,43 @@ If the repo is genuinely empty, say so and ask the pod to pick the stack before 
 
 ## Frontend
 
-| | |
-|---|---|
-| Framework | React 19 + TypeScript + Vite 8 |
+|                                 |                                                                                                                                                                                                                                             |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework                       | React 19 + TypeScript + Vite 8                                                                                                                                                                                                              |
 | Conventions / instructions file | [.github/instructions/ba-agent-rules.md](ba-agent-rules.md), [docs/architecture/coding-conventions.md](../../docs/architecture/coding-conventions.md), [docs/architecture/folder-structure.md](../../docs/architecture/folder-structure.md) |
 
 ## Backend
 
-| | |
-|---|---|
-| Framework | None in current workshop scope (frontend-only) |
-| Conventions / instructions file | N/A |
+|                                 |                                                |
+| ------------------------------- | ---------------------------------------------- |
+| Framework                       | None in current workshop scope (frontend-only) |
+| Conventions / instructions file | N/A                                            |
 
 ## Data / storage
 
-| | |
-|---|---|
-| Choice | Browser localStorage (tables: users, auth_sessions) |
+|             |                                                                                                                                                                                                      |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Choice      | Browser localStorage (tables: users, auth_sessions)                                                                                                                                                  |
 | Conventions | [docs/architecture/authentication.md](../../docs/architecture/authentication.md), [src/libs/localDb.ts](../../src/libs/localDb.ts), [src/services/authService.ts](../../src/services/authService.ts) |
 
 ## Build & run commands
 
 Fill these in as soon as they exist — `dev-implementation` and `dev-unit-testing` both run them before reporting a slice done.
 
-| Action | Command |
-|---|---|
-| Install | npm install |
-| Run | npm run dev |
-| Test | npm run test (unit/component), npm run e2e (Playwright e2e) |
-| Lint | npm run lint |
+| Action  | Command                                                     |
+| ------- | ----------------------------------------------------------- |
+| Install | npm install                                                 |
+| Run     | npm run dev                                                 |
+| Test    | npm run test (unit/component), npm run e2e (Playwright e2e) |
+| Lint    | npm run lint                                                |
 
 ## Quality and verification commands
 
-| Action | Command |
-|---|---|
-| Type check | npm run type-check |
-| Format check | npm run format-check |
-| Full local check | npm run lint-check |
+| Action           | Command              |
+| ---------------- | -------------------- |
+| Type check       | npm run type-check   |
+| Format check     | npm run format-check |
+| Full local check | npm run lint-check   |
 
 If a row is blank, the agent should discover the command from the project manifest's scripts/targets and record it here.
 
@@ -78,7 +78,7 @@ These are the rules `dev-code-review` checks against. They hold for any stack.
 - No personal data in logs.
 - Nothing that must survive a restart lives only in memory.
 
-**Performance** *(workshop-scale — don't over-engineer)*
+**Performance** _(workshop-scale — don't over-engineer)_
 
 - No queries or network calls inside a loop over user data.
 - Anything that can block the UI runs async.
@@ -87,11 +87,11 @@ These are the rules `dev-code-review` checks against. They hold for any stack.
 
 Fill in only if your MVP calls an LLM or AI API.
 
-| | |
-|---|---|
-| Provider / model | *(fill in)* |
-| API key env var (never commit the key) | *(fill in)* |
-| Fallback when the call fails or is rate-limited | *(fill in — an MVP that dies on a 429 during the demo is a lost demo)* |
+|                                                 |                                                                        |
+| ----------------------------------------------- | ---------------------------------------------------------------------- |
+| Provider / model                                | _(fill in)_                                                            |
+| API key env var (never commit the key)          | _(fill in)_                                                            |
+| Fallback when the call fails or is rate-limited | _(fill in — an MVP that dies on a 429 during the demo is a lost demo)_ |
 
 Current value for this repo: no runtime AI provider is integrated in app code yet.
 

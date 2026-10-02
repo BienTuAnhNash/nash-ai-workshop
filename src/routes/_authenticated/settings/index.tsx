@@ -6,9 +6,5 @@ export const Route = createFileRoute('/_authenticated/settings/')({
 })
 
 function RouteComponent() {
-  return (
-    <PageWrapper pageTitle="Settings">
-      Content
-    </PageWrapper>
-  )
+  return <PageWrapper pageTitle="Settings">Content</PageWrapper>
 }

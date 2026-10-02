@@ -1,4 +1,4 @@
-Welcome to your new TanStack Start app! 
+Welcome to your new TanStack Start app!
 
 # Getting Started
 
@@ -28,6 +28,7 @@ npm run test
 ```
 
 ## Tech stacks
+
 1. Framework: React + Vite, TypeScript
 2. Styling: Tailwind CSS, ShadCN
 3. Router: TanStack Router
@@ -38,5 +39,6 @@ npm run test
 8. Linting: ESLint, Prettier, Husky + lint-staged
 
 ## Stay in touch
+
 - Author - TuAnhInTech
 - Website - [https://tuanhintech.com/](https://tuanhintech.com/)

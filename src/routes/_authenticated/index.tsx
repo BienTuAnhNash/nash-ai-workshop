@@ -7,9 +7,5 @@ export const Route = createFileRoute('/_authenticated/')({
 
 // eslint-disable-next-line react-refresh/only-export-components
 function Home() {
-  return (
-    <PageWrapper pageTitle="Home">
-      Content
-    </PageWrapper>
-  )
+  return <PageWrapper pageTitle="Home">Content</PageWrapper>
 }

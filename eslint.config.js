@@ -31,9 +31,9 @@ export default defineConfig([
       'pnpm/json-enforce-catalog': 'off',
       'import/consistent-type-specifier-style': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
-      "react-refresh/only-export-components": 'warn',
+      'react-refresh/only-export-components': 'warn',
       'react-hooks/set-state-in-effect': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn'
+      '@typescript-eslint/no-explicit-any': 'warn',
       // '@typescript-eslint/no-unnecessary-condition': 'warn',
       // '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
     },

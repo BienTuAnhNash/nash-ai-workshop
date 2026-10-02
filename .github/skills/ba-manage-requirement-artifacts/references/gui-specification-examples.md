@@ -43,7 +43,7 @@ This reference provides canonical examples of the 4-column UI Specification Tabl
 
 ## Screen Change Log Format
 
-| Change ID | User Story                            | Changed Screen Area / Behavior | Change Summary                                          | Source / Reference                                      |
-| --------- | ------------------------------------- | ------------------------------ | ------------------------------------------------------- | ------------------------------------------------------- |
+| Change ID | User Story                               | Changed Screen Area / Behavior | Change Summary                                          | Source / Reference                                         |
+| --------- | ---------------------------------------- | ------------------------------ | ------------------------------------------------------- | ---------------------------------------------------------- |
 | CHG01     | `US-001` (`./us-001-create-request.md`)  | Initial Form Layout            | Created initial request submission form                 | `Wireframe` (`./wireframes/wireframe-create-request.html`) |
 | CHG02     | `US-004` (`./us-004-add-attachments.md`) | Attachments Dropzone           | Added Supporting Attachments multi-file upload dropzone | `Flow Diagram` (`./diagrams/diagram-submission-flow.md`)   |

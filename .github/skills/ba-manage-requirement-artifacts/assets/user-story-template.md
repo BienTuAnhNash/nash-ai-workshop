@@ -42,8 +42,8 @@ As a `<user role>` I want to `<goal>` so that I can `<business value>`
 
 ### Screen / GUI Specification References
 
-| Reference ID | Screen / Artifact           | Reference                                           | Story-Relevant Behavior                                             |
-| ------------ | --------------------------- | --------------------------------------------------- | ------------------------------------------------------------------- |
+| Reference ID | Screen / Artifact           | Reference                                                                                    | Story-Relevant Behavior                                             |
+| ------------ | --------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | UI01         | `<Screen or artifact name>` | `<GUI Spec or Wireframe>` (`./gui-<screen-name>.md` or `./wireframes/<wireframe-name>.html`) | `<Behavior needed to understand the story and acceptance criteria>` |
 
 ---

@@ -60,10 +60,12 @@ Write concise acceptance criteria in Gherkin format, organized progressively acr
 
 1. **Tier 1 (Core Functional Journeys)**: Primary nominal success flow, valid alternative user workflows, and entry variations (`**AC 1**: <Title>`).
 2. **Tier 2 (Business Rules & Boundary Conditions)**: Form validation summary (`**AC 2**: Form Input Validation`) and distinct business rule failure scenarios (`**AC 3**: <Title>`).
-  - **Form Field Validation (UI Level)**: Summarize in a single AC and link to the GUI specification (e.g., `Then the system blocks submission and displays field validation errors per the linked GUI Specification (./gui-screen-name.md)`). Field-level regex and character bounds live in the GUI Spec table.
-   - **Business Rule Failures**: For business logic blocks (e.g., duplicate record, limit exceeded, promo restriction), provide dedicated ACs specifying exact, quote-delimited user-facing error copy:
-     - _Duplicate_: `Then the system displays error: "An account with this email already exists."`
-     - _Business Limit_: `Then the system blocks transfer and displays: "Transfer amount exceeds daily limit of $5,000.00."`
+
+- **Form Field Validation (UI Level)**: Summarize in a single AC and link to the GUI specification (e.g., `Then the system blocks submission and displays field validation errors per the linked GUI Specification (./gui-screen-name.md)`). Field-level regex and character bounds live in the GUI Spec table.
+- **Business Rule Failures**: For business logic blocks (e.g., duplicate record, limit exceeded, promo restriction), provide dedicated ACs specifying exact, quote-delimited user-facing error copy:
+  - _Duplicate_: `Then the system displays error: "An account with this email already exists."`
+  - _Business Limit_: `Then the system blocks transfer and displays: "Transfer amount exceeds daily limit of $5,000.00."`
+
 3. **Tier 3 (Security, State & Technical Exceptions)**: Authorization restrictions, invalid lifecycle state transitions, or backend service failures (`**AC 4**: <Title>`).
    - **Permission / Auth**: `Then the system displays: "You do not have permission to approve orders exceeding $10,000."`
    - **Invalid State**: `Then the system prevents cancellation and displays: "Order #1024 has already shipped and cannot be cancelled online."`

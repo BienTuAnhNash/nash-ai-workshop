@@ -62,8 +62,8 @@ Every GUI specification contains a single comprehensive UI component table:
 
 GUI specs are **screen-centric and cumulative**. When multiple user stories affect the same screen over time, update the existing component table and append a row to the `Screen Change Log`:
 
-| Change ID | User Story                                    | Changed Screen Area / Behavior  | Change Summary                | Source / Reference                                               |
-| --------- | --------------------------------------------- | ------------------------------- | ----------------------------- | ---------------------------------------------------------------- |
+| Change ID | User Story                                      | Changed Screen Area / Behavior  | Change Summary                | Source / Reference                                                |
+| --------- | ----------------------------------------------- | ------------------------------- | ----------------------------- | ----------------------------------------------------------------- |
 | CHG01     | `<User Story ID>` (`./us-<id>-<story-name>.md`) | `<Screen section or component>` | `<Summary of screen changes>` | `<Wireframe / Diagram / Ticket>` (`./diagrams/<diagram-name>.md`) |
 
 ### Traceability Rules:

@@ -19,8 +19,8 @@ parent_epic: '<Epic title or TBD>'
 
 ## Screen Change Log
 
-| Change ID | User Story                                    | Changed Screen Area / Behavior  | Change Summary                                        | Source / Reference                                                     |
-| --------- | --------------------------------------------- | ------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------- |
+| Change ID | User Story                                      | Changed Screen Area / Behavior  | Change Summary                                        | Source / Reference                                                      |
+| --------- | ----------------------------------------------- | ------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------- |
 | CHG01     | `<User Story ID>` (`./us-<id>-<story-name>.md`) | `<Screen section or component>` | `<Summary of screen behavior introduced or modified>` | `<Wireframe / Ticket / Diagram>` (`./wireframes/<wireframe-name>.html`) |
 
 ---

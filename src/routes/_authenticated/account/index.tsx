@@ -27,7 +27,7 @@ function RouteComponent() {
   }
 
   const handleSignout = async () => {
-    await signOutMutation.mutate()
+    await signOutMutation.mutateAsync()
     window.location.href = ROUTES.SIGN_IN
   }
 

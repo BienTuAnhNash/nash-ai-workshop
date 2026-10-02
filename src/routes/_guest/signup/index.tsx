@@ -38,7 +38,7 @@ function RouteComponent() {
 
   const onSubmit = async (data: SignupForm) => {
     try {
-      await signupMutation.mutate({
+      await signupMutation.mutateAsync({
         name: data.name,
         email: data.email,
         password: data.password,

@@ -45,7 +45,7 @@ export function AppSidebar() {
 
   const handleClickSignout = async () => {
     try {
-      await signOutMutation.mutate()
+      await signOutMutation.mutateAsync()
       window.location.href = ROUTES.SIGN_IN
       return
     } catch (error) {

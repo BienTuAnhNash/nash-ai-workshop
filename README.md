@@ -1,82 +1,101 @@
-# Welcome to your new TanStack Start app
+# Nash AI Workshop
 
-## Getting Started
+A lightweight React + TypeScript starter used for AI workshop demos.
 
-To run this application:
+This project is optimized for fast prototyping with:
 
-Copy file **.env.example** then create a new file **.env**, pase content to it.
+- localStorage-based authentication/data flow (no backend required)
+- clean folder architecture
+- unit testing and e2e testing setup
+
+## Requirements
+
+- Node.js 20+
+- npm 10+
+
+## Quick Start
+
+1. Install dependencies:
 
 ```bash
 npm install
+```
+
+1. Create environment file from template:
+
+```bash
+cp .env.example .env
+```
+
+1. Start development server:
+
+```bash
 npm run dev
 ```
 
-## Building For Production
+App runs at [http://localhost:3000](http://localhost:3000).
 
-To build this application for production:
+## Available Scripts
 
-```bash
-npm run build
-```
+- `npm run dev` Start development server
+- `npm run build` Build production bundle
+- `npm run preview` Preview production build
+- `npm run lint` Run ESLint
+- `npm run type-check` Run TypeScript type check
+- `npm run format` Run Prettier and ESLint fix
+- `npm run test` Run unit/component tests (Vitest)
+- `npm run test:watch` Run tests in watch mode
 
 ## Testing
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+### Unit and Component Tests
 
 ```bash
 npm run test
 ```
 
-### E2E testing with Playwright
+### E2E Tests (Playwright)
 
-Install Playwright browser (Chromium):
+Install browser once:
 
 ```bash
 npx playwright install chromium
 ```
 
-Run end-to-end tests:
+Run tests:
 
 ```bash
 npm run e2e
 ```
 
-Open Playwright UI mode:
+Extra e2e commands:
 
-```bash
-npm run e2e:ui
-```
+- `npm run e2e:ui` Run Playwright UI mode
+- `npm run e2e:headed` Run headed browser mode
+- `npm run e2e:debug` Run debug mode
+- `npm run e2e:report` Open HTML report
 
-Run headed browser mode:
+## Architecture Docs
 
-```bash
-npm run e2e:headed
-```
+- [Tech Stack](docs/architecture/tech-stack.md)
+- [Folder Structure](docs/architecture/folder-structure.md)
+- [Coding Conventions](docs/architecture/coding-conventions.md)
+- [Authentication](docs/architecture/authentication.md)
 
-Debug tests interactively:
+## Tech Stack Summary
 
-```bash
-npm run e2e:debug
-```
+- React 19 + TypeScript + Vite 8
+- TanStack Router + TanStack Query
+- Tailwind CSS + ShadCN/Radix UI
+- React Hook Form + Zod
+- Vitest + Testing Library + Playwright
 
-Open HTML report:
+## Notes
 
-```bash
-npm run e2e:report
-```
+- Current auth/data mode is localStorage-based for workshop/demo speed.
+- Do not use this auth approach in production without backend security.
 
-## Tech stacks
+## Author
 
-1. Framework: React + Vite, TypeScript
-2. Styling: Tailwind CSS, ShadCN
-3. Router: TanStack Router
-4. Query, caching: Axios, TanStack Query
-5. Form: React Hook Form
-6. Validation: Zod
-7. State managing: Zustand (optional)
-8. Linting: ESLint, Prettier, Husky + lint-staged
-
-## Stay in touch
-
-- Author - TuAnhInTech
-- Website - [https://tuanhintech.com/](https://tuanhintech.com/)
+- TuAnhInTech
+- [https://tuanhintech.com/](https://tuanhintech.com/)
